@@ -1,22 +1,21 @@
-
 <%@page import="java.util.List"%>
-<%@page import="modelo.Categoria"%>
-<%@page import="dao.CategoriaDAO"%>
+<%@page import="modelo.Console"%>
+<%@page import="dao.ConsoleDAO"%>
 <%@include file="../cabecalho.jsp" %>
 
 <% 
     
-    CategoriaDAO dao = new CategoriaDAO();
-    List<Categoria> lista;
+    ConsoleDAO dao = new ConsoleDAO();
+    List<Console> lista;
     
-    if (request.getParameter("txtFiltro") == "findFilter") {
+    if (request.getParameter("txtFiltro") != null) {
         lista = dao.listar(request.getParameter("txtFiltro"));
         
     } else{ 
    
     //verifico se é excluir
         if(request.getParameter("codigo") != null){
-            Categoria obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+            Console obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
             if(obj != null){
                 dao.excluir(obj);
             }
@@ -32,7 +31,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Gerenciamento de Categorias
+            Gerenciamento de Consoles
 
         </h1>
         <ol class="breadcrumb">
@@ -72,21 +71,24 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>Código</th>
                         <th>Nome</th>
-                        <th>Ações</th>
+                        <th>Marca</th>
+                        <th>Valor</th>
+                        <th >Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <%for(Categoria item: lista)
+                    <%for(Console item: lista)
                     {
                     %>
                     <tr>
-                        <td><%=item.getId()%></td>
+                        <td><%=item.getNumSerie() %></td>
                         <td><%=item.getNome() %></td>
-                        <td><a href="upd.jsp?codigo=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
-                            <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" 
-                                    onclick="codigo=<%=item.getId()%>">Excluir</button>  
+                        <td><%=item.getMarca()%></td>
+                        <td><%=item.getValor()%></td>
+                        <td><a href="upd.jsp?codigo=<%=item.getNumSerie()%>" class="btn  btn-primary btn-sm">Alterar</a>
+                            <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="codigo=<%=item.getNumSerie()%>">Excluir</button>  
                         </td>
                     </tr>
                     <% } %>

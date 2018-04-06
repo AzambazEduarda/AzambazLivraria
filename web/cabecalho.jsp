@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Sistema de Comércio Eletrônico</title>
+    <title>Livraria Maneira das Quebradas</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -73,7 +73,16 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="../console/"><i class="fa fa-fw fa-edit"></i> Consoles</a>
+                        <a href="../categoria/"><i class="fa fa-fw fa-edit"></i>Categoria</a>
+                    </li>
+                    <li>
+                        <a href="../livro/"><i class="fa fa-fw fa-edit"></i>Livro</a>
+                    </li>
+                    <li>
+                        <a href="../autor/"><i class="fa fa-fw fa-edit"></i>Autor</a>
+                    </li>
+                    <li>
+                        <a href="../editora/"><i class="fa fa-fw fa-edit"></i>Editora</a>
                     </li>
                     <li>
                         <a href="../joystick/"><i class="fa fa-fw fa-bar-chart-o"></i> Joysticks</a>
