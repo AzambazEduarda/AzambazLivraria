@@ -19,7 +19,7 @@
         obj.setImagem1(request.getParameter("txtImagem1"));
         obj.setImagem2(request.getParameter("txtImagem2"));
         obj.setImagem3(request.getParameter("txtImagem3"));
-        
+        obj.setSinopse(request.getParameter(""));
         Boolean resultado = dao.incluir(obj);
         if (resultado) {
             msg = "Registro cadastrado com sucesso";
@@ -77,7 +77,7 @@
                     </div>
                       <div class="form-group">
                         <label>Categoria</label>
-                        <input class="form-control" type="text"  name="txtCategoria"  required />
+                        <input class="form-control" type="number"  name="txtCategoria"  required />
                     </div>
                      <div class="form-group">
                         <label>Editora</label>
@@ -94,6 +94,10 @@
                      <div class="form-group">
                         <label>imagem3</label>
                         <input class="form-control" type="text"  name="txtImagem3"  required />
+                    </div>
+                     <div class="form-group">
+                        <label>Sinopse</label>
+                        <input class="form-control" type="text"  name="txtSinopse"  required />
                     </div>
                     <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
 

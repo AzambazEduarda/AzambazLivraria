@@ -1,21 +1,17 @@
 
-<%@page import="java.math.BigDecimal"%>
-<%@page import="dao.AutorDAO"%>
-<%@page import="modelo.Autor"%>
+<%@page import="dao.CategoriaDAO"%>
+<%@page import="modelo.Categoria"%>
 <%@page import="java.util.List"%>
 
 <%@include file="../cabecalho.jsp" %>
 <%
     String msg = "";
     String classe = "";
-    Autor obj = new Autor();
-    AutorDAO dao = new AutorDAO();
-    
-    if (request.getParameter("txtNome") != null && request.getParameter("txtMarca") != null && request.getParameter("txtValor") != null) {
+    Categoria obj = new Categoria();
+    CategoriaDAO dao = new CategoriaDAO();
+
+    if (request.getParameter("txtNome") != null) {
         obj.setNome(request.getParameter("txtNome"));
-        obj.setNacionalidade(request.getParameter("txtNacionalidade"));
-        obj.setSexo(request.getParameter("txtSexo").charAt(0));
-        obj.setFoto(request.getParameter("txtFoto"));
 
         Boolean resultado = dao.incluir(obj);
         if (resultado) {
@@ -25,8 +21,8 @@
             msg = "Não foi possível cadastrar";
             classe = "alert-danger";
         }
-    } 
-    
+    }
+
 
 %>
 <div class="row">
@@ -49,7 +45,7 @@
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Autors
+            Categorias
         </div>
         <div class="panel-body">
 
@@ -64,20 +60,6 @@
                         <label>Nome</label>
                         <input class="form-control" type="text"  name="txtNome"  required />
                     </div>
-                    <div class="form-group">
-                        <label>Foto</label>
-                        <input class="form-control" type="file"  name="Foto"  required />
-                    </div>
-                    <div class="form-group">
-                        <label>Sexo</label>
-                        <input class="form-control" type="text"  name="txtSexo"  required />
-                        <option value='M'>Masculino</option><option value='F'>Feminino</option>
-                    </div>
-                    <div class="form-group">
-                        <label>Nacionalidade</label>
-                        <input class="form-control" type="text"  name="txtNacionalidade"  required />
-                    </div>
-                    
 
                     <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
 

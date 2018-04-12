@@ -15,9 +15,15 @@ String classe = "";
         //popular com oq ele digitou no form
         obj.setId(Integer.parseInt(request.getParameter("txtCodigo")));
         obj.setNome(request.getParameter("txtNome"));
-        obj.setMarca(request.getParameter("txtMarca"));
-        BigDecimal bd = new BigDecimal(request.getParameter("txtValor"));
-        obj.setValor(bd);
+        obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
+        obj.setDatapublicacao();
+        obj.setCategoria(Integer.parseInt(request.getParameter("txtCategoria")));
+        obj.setEditora((request.getParameter("txtEditora")));
+        obj.setImagem1(request.getParameter("txtImagem1"));
+        obj.setImagem2(request.getParameter("txtImagem2"));
+        obj.setImagem3(request.getParameter("txtImagem3"));
+        obj.setSinopse(request.getParameter("txtSinopse"));
+        
         
         Boolean resultado = dao.alterar(obj);
         
@@ -78,8 +84,8 @@ String classe = "";
                 <div class="col-lg-6">
 
                     <div class="form-group">
-                        <label>Código</label>
-                        <input class="form-control" type="text" name="txtCodigo" readonly value="<%=obj.getNumSerie()%>"/>
+                        <label>Id</label>
+                        <input class="form-control" type="text" name="txtCodigo" readonly value="<%=obj.getId()%>"/>
                     </div>
                     
                     <div class="form-group">
@@ -87,12 +93,37 @@ String classe = "";
                         <input class="form-control" type="text" name="txtNome" required value="<%=obj.getNome() %>" />
                     </div>
                     <div class="form-group">
-                        <label>Marca</label>
-                        <input class="form-control" type="text" name="txtMarca" required value="<%=obj.getMarca()%>" />
+                        <label>Preco</label>
+                        <input class="form-control" type="number" name="txtPreco" required value="<%=obj.getPreco()%>" />
                     </div>
                     <div class="form-group">
-                        <label>Valor</label>
-                        <input class="form-control" type="number" name="txtValor" required value="<%=obj.getValor()%>" />
+                        <label>Data da Publicacao</label>
+                        <input class="form-control" type="number" name="txtDataDaPublicacao" required value="<%=obj.getDatapublicacao()%>" />
+                    </div>
+                       <div class="form-group">
+                        <label>Categoria</label>
+                        <input class="form-control" type="number" name="txtCategoria" required value="<%=obj.getCategoria()%>" />
+                    </div>
+                       <div class="form-group">
+                        <label>Editora</label>
+                        <input class="form-control" type="text" name="txtEditora" required value="<%=obj.getEditora()%>" />
+                    </div>
+                       <div class="form-group">
+                        <label>Imagem1</label>
+                        <input class="form-control" type="text" name="txtImagem1" required value="<%=obj.getImagem1()%>" />
+                    </div>
+                       <div class="form-group">
+                        <label>Imagem2</label>
+                        <input class="form-control" type="text" name="txtImagem2" required value="<%=obj.getImagem2()%>" />
+                    </div>
+                       <div class="form-group">
+                        <label>Imagem3</label>
+                        <input class="form-control" type="text" name="txtImagem3" required value="<%=obj.getImagem3()%>" />
+                    </div>
+                     </div>
+                       <div class="form-group">
+                        <label>Sinopse</label>
+                        <input class="form-control" type="text" name="txtSinopse" required value="<%=obj.getSinopse()%>" />
                     </div>
 
 

@@ -1,12 +1,13 @@
+
 <%@page import="java.util.List"%>
-<%@page import="modelo.Livro"%>
-<%@page import="dao.LivroDAO"%>
+<%@page import="modelo.Categoria"%>
+<%@page import="dao.CategoriaDAO"%>
 <%@include file="../cabecalho.jsp" %>
 
 <% 
     
-    LivroDAO dao = new LivroDAO();
-    List<Livro> lista;
+    CategoriaDAO dao = new CategoriaDAO();
+    List<Categoria> lista;
     
     if (request.getParameter("txtFiltro") == "findFilter") {
         lista = dao.listar(request.getParameter("txtFiltro"));
@@ -15,7 +16,7 @@
    
     //verifico se é excluir
         if(request.getParameter("codigo") != null){
-            Livro obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+            Categoria obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
             if(obj != null){
                 dao.excluir(obj);
             }
@@ -31,7 +32,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Gerenciamento de Livros
+            Gerenciamento de Categorias
 
         </h1>
         <ol class="breadcrumb">
@@ -73,32 +74,19 @@
                     <tr>
                         <th>Id</th>
                         <th>Nome</th>
-                        <th>Preco</th>
-                        <th>Datapublicacao</th>
-                        <th>Editora</th>
-                        <th>Imagem1</th>
-                        <th>Imagem2</th>
-                        <th>Imagem3</th>
-                        <th>Sinopse</th>
-                        <th >Ações</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <%for(Livro item: lista)
+                    <%for(Categoria item: lista)
                     {
                     %>
                     <tr>
-                        <td><%=item.getId() %></td>
+                        <td><%=item.getId()%></td>
                         <td><%=item.getNome() %></td>
-                        <td><%=item.getPreco()%></td>
-                        <td><%=item.getDatapublicacao()%></td>
-                        <td><%=item.getEditora() %></td>
-                        <td><%=item.getImagem1() %></td>
-                        <td><%=item.getImagem2() %></td>
-                        <td><%=item.getImagem3() %></td>
-                        <td><%=item.getSinopse() %></td>
                         <td><a href="upd.jsp?codigo=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
-                            <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="codigo=<%=item.getId()%>">Excluir</button>  
+                            <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" 
+                                    onclick="codigo=<%=item.getId()%>">Excluir</button>  
                         </td>
                     </tr>
                     <% } %>
