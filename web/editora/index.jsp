@@ -1,13 +1,13 @@
 
 <%@page import="java.util.List"%>
-<%@page import="modelo.Categoria"%>
-<%@page import="dao.CategoriaDAO"%>
+<%@page import="modelo.Editora"%>
+<%@page import="dao.EditoraDAO"%>
 <%@include file="../cabecalho.jsp" %>
 
 <% 
     
-    CategoriaDAO dao = new CategoriaDAO();
-    List<Categoria> lista;
+    EditoraDAO dao = new EditoraDAO();
+    List<Editora> lista;
     
     if (request.getParameter("txtFiltro") == "findFilter") {
         lista = dao.listar(request.getParameter("txtFiltro"));
@@ -16,7 +16,7 @@
    
     //verifico se é excluir
         if(request.getParameter("codigo") != null){
-            Categoria obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+            Editora obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
             if(obj != null){
                 dao.excluir(obj);
             }
@@ -32,7 +32,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Gerenciamento de Categorias
+            Gerenciamento de Editoras
 
         </h1>
         <ol class="breadcrumb">
@@ -72,21 +72,23 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>CNPJ</th>
                         <th>Nome</th>
+                        <th>Logo</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <%for(Categoria item: lista)
+                    <%for(Editora item: lista)
                     {
                     %>
                     <tr>
-                        <td><%=item.getId()%></td>
+                        <td><%=item.getCnpj()%></td>
                         <td><%=item.getNome() %></td>
-                        <td><a href="upd.jsp?codigo=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
+                        <td><%=item.getLogo() %></td>
+                        <td><a href="upd.jsp?codigo=<%=item.getCnpj()%>" class="btn  btn-primary btn-sm">Alterar</a>
                             <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" 
-                                    onclick="codigo=<%=item.getId()%>">Excluir</button>  
+                                    onclick="codigo=<%=item.getCnpj()%>">Excluir</button>  
                         </td>
                     </tr>
                     <% } %>

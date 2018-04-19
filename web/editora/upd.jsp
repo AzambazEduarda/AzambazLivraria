@@ -1,19 +1,20 @@
 
-<%@page import="modelo.Categoria"%>
-<%@page import="dao.CategoriaDAO"%>
+<%@page import="modelo.Editora"%>
+<%@page import="dao.EditoraDAO"%>
 <%@include file="../cabecalho.jsp" %>
 <%
 String msg ="";
 String classe = "";
     
-    CategoriaDAO dao = new CategoriaDAO();
-    Categoria obj = new Categoria();
+    EditoraDAO dao = new EditoraDAO();
+    Editora obj = new Editora();
     //verifica se é postm ou seja, quer alterar
     if(request.getMethod().equals("POST")){
         
         //popular com oq ele digitou no form
-        obj.setId(Integer.parseInt(request.getParameter("txtId")));
+        obj.setCnpj(request.getParameter("Cnpj"));
         obj.setNome(request.getParameter("txtNome"));
+        obj.setLogo(request.getParameter("txtLogo"));
         Boolean resultado = dao.alterar(obj);
         
         if(resultado){
@@ -32,7 +33,7 @@ String classe = "";
             return;
         }
         
-        dao = new CategoriaDAO();
+        dao = new EditoraDAO();
         obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
         
         if(obj == null){
@@ -61,7 +62,7 @@ String classe = "";
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Categoria
+            Editora
         </div>
         <div class="panel-body">
 
@@ -73,13 +74,18 @@ String classe = "";
                 <div class="col-lg-6">
 
                     <div class="form-group">
-                        <label>Id</label>
-                        <input class="form-control" type="text" name="txtId" readonly value="<%=obj.getId()%>"/>
+                        <label>CNPJ</label>
+                        <input class="form-control" type="number" name="txtCnpj" readonly value="<%=obj.getCnpj()%>"/>
                     </div>
                     
                     <div class="form-group">
                         <label>Nome</label>
                         <input class="form-control" type="text" name="txtNome" required value="<%=obj.getNome() %>" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Logo</label>
+                        <input class="form-control" type="foto" name="txtFoto" required value="<%=obj.getLogo() %>" />
                     </div>
              
 

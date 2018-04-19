@@ -1,14 +1,14 @@
 
-<%@page import="dao.CategoriaDAO"%>
-<%@page import="modelo.Categoria"%>
+<%@page import="dao.EditoraDAO"%>
+<%@page import="modelo.Editora"%>
 <%@page import="java.util.List"%>
 
 <%@include file="../cabecalho.jsp" %>
 <%
     String msg = "";
     String classe = "";
-    Categoria obj = new Categoria();
-    CategoriaDAO dao = new CategoriaDAO();
+    Editora obj = new Editora();
+    EditoraDAO dao = new EditoraDAO();
 
     if (request.getParameter("txtNome") != null) {
         obj.setNome(request.getParameter("txtNome"));
@@ -45,7 +45,7 @@
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Categorias
+            Editoras
         </div>
         <div class="panel-body">
 
@@ -61,11 +61,20 @@
                         <input class="form-control" type="text"  name="txtNome"  required />
                     </div>
 
+                    <div class="form-group">
+                        <label>CNPJ</label>
+                        <input class="form-control" type="number"  name="txtCNPJ"  required />
+                    </div>
+                    <div class="form-group">
+                        <label>logo</label>
+                        <input class="form-control" type="foto"  name="Foto"  required />
+                    </div>
+
                     <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
 
             </form>
 
-        </div>
+                </div>
 
 
     </div>
