@@ -9,7 +9,7 @@
     CategoriaDAO dao = new CategoriaDAO();
     List<Categoria> lista;
     
-    if (request.getParameter("txtFiltro") == "findFilter") {
+    if (request.getParameter("txtFiltro") != null ) {
         lista = dao.listar(request.getParameter("txtFiltro"));
         
     } else{ 

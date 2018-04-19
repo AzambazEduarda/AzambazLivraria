@@ -84,9 +84,6 @@
                     <li>
                         <a href="../editora/"><i class="fa fa-fw fa-edit"></i>Editora</a>
                     </li>
-                    <li>
-                        <a href="../joystick/"><i class="fa fa-fw fa-bar-chart-o"></i> Joysticks</a>
-                    </li>
                     
                 </ul>
             </div>

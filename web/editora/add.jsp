@@ -23,12 +23,11 @@
         }
     }
 
-
 %>
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Sistema de Comércio Eletrônico
+            Meu Sistema, dois bjos
             <small>Admin</small>
         </h1>
         <ol class="breadcrumb">
@@ -63,7 +62,7 @@
 
                     <div class="form-group">
                         <label>CNPJ</label>
-                        <input class="form-control" type="number"  name="txtCNPJ"  required />
+                        <input class="form-control" type="text"  name="txtCNPJ"  required />
                     </div>
                     <div class="form-group">
                         <label>logo</label>
@@ -74,7 +73,7 @@
 
             </form>
 
-                </div>
+        </div>
 
 
     </div>

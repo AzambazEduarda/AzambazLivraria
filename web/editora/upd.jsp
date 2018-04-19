@@ -69,13 +69,13 @@ String classe = "";
             <div class="alert <%=classe%>">
                 <%=msg%>
             </div>
-            <form action="#" method="post">
+            <form action="../UploadWS" method="post" enctype="multipart/form-data">
                 
                 <div class="col-lg-6">
 
                     <div class="form-group">
                         <label>CNPJ</label>
-                        <input class="form-control" type="number" name="txtCnpj" readonly value="<%=obj.getCnpj()%>"/>
+                        <input class="form-control" type="text" name="txtCnpj" readonly value="<%=obj.getCnpj()%>"/>
                     </div>
                     
                     <div class="form-group">

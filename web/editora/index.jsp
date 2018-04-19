@@ -9,7 +9,7 @@
     EditoraDAO dao = new EditoraDAO();
     List<Editora> lista;
     
-    if (request.getParameter("txtFiltro") == "findFilter") {
+    if (request.getParameter("txtFiltro") !=null) {
         lista = dao.listar(request.getParameter("txtFiltro"));
         
     } else{ 
@@ -85,7 +85,10 @@
                     <tr>
                         <td><%=item.getCnpj()%></td>
                         <td><%=item.getNome() %></td>
-                        <td><%=item.getLogo() %></td>
+                        <td>
+                            <img src="../arquivos/<%=item.getLogo() %>"
+                                 width="40px" height="40px"/>
+                        </td>
                         <td><a href="upd.jsp?codigo=<%=item.getCnpj()%>" class="btn  btn-primary btn-sm">Alterar</a>
                             <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" 
                                     onclick="codigo=<%=item.getCnpj()%>">Excluir</button>  
