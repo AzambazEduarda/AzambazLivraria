@@ -8,7 +8,7 @@
     LivroDAO dao = new LivroDAO();
     List<Livro> lista;
     
-    if (request.getParameter("txtFiltro") == "findFilter") {
+    if (request.getParameter("txtFiltro") !=null) {
         lista = dao.listar(request.getParameter("txtFiltro"));
         
     } else{ 

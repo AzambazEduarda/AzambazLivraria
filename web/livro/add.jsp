@@ -1,3 +1,4 @@
+<%@page import="util.StormData"%>
 <%@page import="java.math.BigDecimal"%>
 <%@page import="dao.LivroDAO"%>
 <%@page import="modelo.Livro"%>
@@ -13,14 +14,15 @@
     if (request.getParameter("txtNome") != "findFilter") {
         obj.setNome(request.getParameter("txtNome"));
         obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
-        obj.setDatapublicacao(request.getParameter("txtDataDaPublicacao"));
-        obj.setCategoria((request.getParameter("txtCategoria")));
-        obj.setEditora((request.getParameter("txtEditora")));
+//        obj.setDatapublicacao(StormData.formata(Date data,String formata));
+//        obj.setCategoria(Integer.parseInt(request.getParameter("txtCategoria")));
+//        obj.setEditora((request.getParameter("txtEditora")));
         obj.setImagem1(request.getParameter("txtImagem1"));
         obj.setImagem2(request.getParameter("txtImagem2"));
         obj.setImagem3(request.getParameter("txtImagem3"));
         obj.setSinopse(request.getParameter(""));
         Boolean resultado = dao.incluir(obj);
+        dao.fecharConexao();
         if (resultado) {
             msg = "Registro cadastrado com sucesso";
             classe = "alert-success";

@@ -14,6 +14,7 @@
         obj.setNome(request.getParameter("txtNome"));
 
         Boolean resultado = dao.incluir(obj);
+        dao.fecharConexao();
         if (resultado) {
             msg = "Registro cadastrado com sucesso";
             classe = "alert-success";
@@ -51,8 +52,7 @@
             <div class="alert <%=classe%>">
                 <%=msg%>
             </div>
-            <form action="#" method="post">
-
+            <form action="../UploadWS" method="post" enctype="multipart/form-data">
                 <div class="col-lg-6">
 
                     <div class="form-group">
@@ -65,7 +65,7 @@
                         <input class="form-control" type="text"  name="txtCNPJ"  required />
                     </div>
                     <div class="form-group">
-                        <label>logo</label>
+                        <label>Logo</label>
                         <input class="form-control" type="foto"  name="Foto"  required />
                     </div>
 

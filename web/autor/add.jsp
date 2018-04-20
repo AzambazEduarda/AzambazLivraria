@@ -18,6 +18,7 @@
         obj.setFoto(request.getParameter("txtFoto"));
 
         Boolean resultado = dao.incluir(obj);
+        dao.fecharConexao();
         if (resultado) {
             msg = "Registro cadastrado com sucesso";
             classe = "alert-success";
@@ -56,7 +57,7 @@
             <div class="alert <%=classe%>">
                 <%=msg%>
             </div>
-            <form action="#" method="post">
+            <form action="../UploadWS" method="post" enctype="multipart/form-data">
 
                 <div class="col-lg-6">
 
@@ -70,8 +71,14 @@
                     </div>
                     <div class="form-group">
                         <label>Sexo</label>
-                        <input class="form-control" type="text"  name="txtSexo"  required />
-                        <option value='M'>Masculino</option><option value='F'>Feminino</option>
+                      
+                        <select >
+                        
+                        <option value='M'>Masculino</option>
+                        <option value='F'>Feminino</option>
+                        
+                    </select>
+                       
                     </div>
                     <div class="form-group">
                         <label>Nacionalidade</label>

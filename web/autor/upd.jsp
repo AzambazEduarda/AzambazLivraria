@@ -23,6 +23,7 @@ String classe = "";
         
         Boolean resultado = dao.alterar(obj);
         
+        
         if(resultado){
             msg = "Registro alterado com sucesso";
             classe = "alert-success";
@@ -78,11 +79,6 @@ String classe = "";
             <form action="#" method="post">
                 
                 <div class="col-lg-6">
-
-                    <div class="form-group">
-                        <label>Id</label>
-                        <input class="form-control" type="text" name="txtId" readonly value="<%=obj.getId()%>"/>
-                    </div>
                     
                     <div class="form-group">
                         <label>Nome</label>
@@ -92,13 +88,10 @@ String classe = "";
                         <label>Nacionalidade</label>
                         <input class="form-control" type="text" name="txtNacionalidade" required value="<%=obj.getNacionalidade()%>" />
                     </div>
-                    <select name="Sexo">
-                        <option value='M'>Masculino</option><option value='F'>Feminino</option>
-                    </select>
+                
                     <div class="form-group">
                         <label>Sexo</label>
-                        <input class="form-control"  name="txtSexo" required value="<%=obj.getSexo()%>" />
-                       
+                        <input class="form-control" type="text"  name="txtSexo"  required value="<%=obj.getSexo()%>" />
                     </div>
                     <div class="form-group">
                         <label>Foto</label>
