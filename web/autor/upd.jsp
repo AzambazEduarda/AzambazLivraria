@@ -4,49 +4,45 @@
 <%@page import="dao.AutorDAO"%>
 <%@include file="../cabecalho.jsp" %>
 <%
-String msg ="";
-String classe = "";
-    
+    String msg = "";
+    String classe = "";
+
     AutorDAO dao = new AutorDAO();
     Autor obj = new Autor();
     //verifica se é postm ou seja, quer alterar
-    if(request.getMethod().equals("POST")){
-        
+    if (request.getMethod().equals("POST")) {
+
         //popular com oq ele digitou no form
         obj.setId(Integer.parseInt(request.getParameter("txtCodigo")));
         obj.setNome(request.getParameter("txtNome"));
         obj.setNacionalidade(request.getParameter("txtMarca"));
         obj.setFoto(request.getParameter("txtFoto"));
         obj.setSexo(request.getParameter("txtSexo").charAt(0));
-        
-        
-        
+
         Boolean resultado = dao.alterar(obj);
-        
-        
-        if(resultado){
+
+        if (resultado) {
             msg = "Registro alterado com sucesso";
             classe = "alert-success";
-        }
-        else{
+        } else {
             msg = "Não foi possível alterar";
             classe = "alert-danger";
         }
-        
-    }else{
+
+    } else {
         //e GET
-        if(request.getParameter("codigo") == null){
+        if (request.getParameter("codigo") == null) {
             response.sendRedirect("index.jsp");
             return;
         }
-        
+
         dao = new AutorDAO();
         obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
-        
-        if(obj == null){
+
+        if (obj == null) {
             response.sendRedirect("index.jsp");
             return;
-        } 
+        }
     }
 %>
 <div class="row">
@@ -77,18 +73,18 @@ String classe = "";
                 <%=msg%>
             </div>
             <form action="#" method="post">
-                
+
                 <div class="col-lg-6">
-                    
+
                     <div class="form-group">
                         <label>Nome</label>
-                        <input class="form-control" type="text" name="txtNome" required value="<%=obj.getNome() %>" />
+                        <input class="form-control" type="text" name="txtNome" required value="<%=obj.getNome()%>" />
                     </div>
                     <div class="form-group">
                         <label>Nacionalidade</label>
                         <input class="form-control" type="text" name="txtNacionalidade" required value="<%=obj.getNacionalidade()%>" />
                     </div>
-                
+
                     <div class="form-group">
                         <label>Sexo</label>
                         <input class="form-control" type="text"  name="txtSexo"  required value="<%=obj.getSexo()%>" />
@@ -99,8 +95,8 @@ String classe = "";
                     </div>
 
 
-                <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
-                
+                    <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
+
             </form>
 
         </div>
