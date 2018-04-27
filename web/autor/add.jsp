@@ -1,5 +1,8 @@
 
+<%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Livro"%>
+<%@page import="dao.LivroDAO"%>
+<%@page import="modelo.Autor"%>
 <%@page import="java.math.BigDecimal"%>
 <%@page import="dao.AutorDAO"%>
 <%@page import="modelo.Autor"%>
@@ -10,30 +13,32 @@
     /////////FAZER ISSO NA PROXIMA AULA
     String msg = "";
     String classe = "";
-    AutorDAO adao = new AutorDAO();
+    LivroDAO ldao = new LivroDAO();
     if (request.getMethod().equals("POST")) {
         //pego uma lista de autores(com mesmo name)
-        String[] autoresid = request.getParameterValues("autores");
+        String[] livrosid = request.getParameter("livros").split(";");
         //popular o livro
-        Livro l = new Livro();
-        l.setNome("StorTroopers - Uma viagem que nao sai");
-        l.setDatapublicacao(new Date());
-        l.setPreco(13.12f);
+        Autor a = new Autor();
+        a.setNome(request.getParameter("txtNome"));
+        a.setFoto(request.getParameter("txtFoto"));
+        a.setNacionalidade(request.getParameter("txtNacionalidade"));
+        a.setSexo(request.getParameter("txtSexo").charAt(0));
+       
         //Autores
-        List<Autor> listaautores = new ArrayList<>();
-        for (String id : autoresid) {
+        List<Livro> listalivros = new ArrayList<>();
+        for (String id : livrosid) {
             Integer idinteger = Integer.parseInt(id);
-            listaautores.add(adao.buscarPorChavePrimaria(idinteger));
+            listalivros.add(ldao.buscarPorChavePrimaria(idinteger));
         }
-        l.setAutorList(listaautores);
+        a.setLivroList(listalivros);
 
-        LivroDAO dao = new LivroDAO();
-        dao.incluir(l);
+        AutorDAO dao = new AutorDAO();
+        dao.incluir(a);
 
     }
     //pego meus autores
 
-    List<Autor> autores = adao.listar();
+    List<Livro> livros = ldao.listar();
     
 //    String msg = "";
 //    String classe = "";
@@ -79,7 +84,7 @@
 <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading">
-            Autors
+            Autores
         </div>
         <div class="panel-body">
 
@@ -90,12 +95,22 @@
 
                 <div class="col-lg-6">
                     
-                    <label>Livros</label>
-                    <select name="livros" multiple>
+                       <label>Livros</label>
+                    <select name="autores" multiple>
                         <%for (Livro l : livros) {%>
                         <option value="<%=l.getId()%>"><%=l.getNome()%>
                         </option>
                         <%}%>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Livros com checkbox</label>
+
+                    <%for (Livro l : livros) {%>
+                    <input type="checkbox" name="autoreschk" value="<%=l.getId()%>"><%=l.getNome()%>
+
+                    <%}%>
                     </select>
 
                     <div class="form-group">
@@ -104,7 +119,7 @@
                     </div>
                     <div class="form-group">
                         <label>Foto</label>
-                        <input class="form-control" type="file"  name="Foto"  required />
+                        <input type="file"  name="txtFoto"  />
                     </div>
                     <div class="form-group">
                         <label>Sexo</label>

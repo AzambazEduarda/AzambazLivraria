@@ -53,7 +53,7 @@
             <div class="alert <%=classe%>">
                 <%=msg%>
             </div>
-            <form action="#" method="post">
+            <form action="../UploadWS" method="post" enctype="multipart/form-data">
 
                 <div class="col-lg-6">
 

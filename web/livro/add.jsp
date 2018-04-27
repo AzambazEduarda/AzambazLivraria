@@ -15,12 +15,13 @@
     AutorDAO adao = new AutorDAO();
     if (request.getMethod().equals("POST")) {
         //pego uma lista de autores(com mesmo name)
-        String[] autoresid = request.getParameterValues("autores");
+        String[] autoresid = request.getParameter("autores").split(";");////Sempre que for n p n o upd tem q ser assim
         //popular o livro
         Livro l = new Livro();
         l.setNome("StorTroopers - Uma viagem que nao sai");
         l.setDatapublicacao(new Date());
         l.setPreco(13.12f);
+        
         //Autores
         List<Autor> listaautores = new ArrayList<>();
         for (String id : autoresid) {
@@ -34,7 +35,6 @@
 
     }
     //pego meus autores
-
     List<Autor> autores = adao.listar();
 ////    if (request.getParameter("txtNome") != "findFilter") {
 ////        obj.setNome(request.getParameter("txtNome"));
@@ -86,7 +86,7 @@
             <div class="alert <%=classe%>">
                 <%=msg%>
             </div>
-            <form action="#" method="post">
+            <form action="../UploadWS" method="post" enctype="multipart/form-data">
 
                 <div class="col-lg-6">
                     <label>Autores</label>
@@ -129,15 +129,15 @@
                 </div>
                 <div class="form-group">
                     <label>Imagem1</label>
-                    <input class="form-control" type="text"  name="txtImagem1"  required />
+                    <input type="file"  name="txtImagem1"  />
                 </div>
                 <div class="form-group">
                     <label>Imagem2</label>
-                    <input class="form-control" type="text"  name="txtImagem2"  required />
+                    <input type="file"  name="txtImagem2"  />
                 </div>
                 <div class="form-group">
                     <label>imagem3</label>
-                    <input class="form-control" type="text"  name="txtImagem3"  required />
+                    <input type="file"  name="txtImagem3"  />
                 </div>
                 <div class="form-group">
                     <label>Sinopse</label>

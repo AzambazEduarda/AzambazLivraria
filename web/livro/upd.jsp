@@ -109,8 +109,9 @@ String classe = "";
                         <input class="form-control" type="text" name="txtEditora" required value="<%=obj.getEditora()%>" />
                     </div>
                        <div class="form-group">
+                           //////ARRUMAR AQUIIIIIIIIIIII
                         <label>Imagem1</label>
-                        <input class="form-control" type="text" name="txtImagem1" required value="<%=obj.getImagem1()%>" />
+                        <input class="form-control" type="text" name="txtFoto" required value="<%=obj.getImagem1()%>" />
                     </div>
                        <div class="form-group">
                         <label>Imagem2</label>

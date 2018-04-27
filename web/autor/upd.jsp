@@ -13,9 +13,9 @@
     if (request.getMethod().equals("POST")) {
 
         //popular com oq ele digitou no form
-        obj.setId(Integer.parseInt(request.getParameter("txtCodigo")));
+        obj.setId(Integer.parseInt(request.getParameter("txtId")));
         obj.setNome(request.getParameter("txtNome"));
-        obj.setNacionalidade(request.getParameter("txtMarca"));
+        obj.setNacionalidade(request.getParameter("txtNacionalidade"));
         obj.setFoto(request.getParameter("txtFoto"));
         obj.setSexo(request.getParameter("txtSexo").charAt(0));
 
@@ -91,7 +91,7 @@
                     </div>
                     <div class="form-group">
                         <label>Foto</label>
-                        <input class="form-control" input type="file" name="Foto" required value="<%=obj.getFoto()%>" />
+                        <input class="form-control" type="text" name="txtFoto" required value="<%=obj.getFoto()%>" />
                     </div>
 
 
