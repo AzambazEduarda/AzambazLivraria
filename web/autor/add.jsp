@@ -23,7 +23,7 @@
         a.setFoto(request.getParameter("txtFoto"));
         a.setNacionalidade(request.getParameter("txtNacionalidade"));
         a.setSexo(request.getParameter("txtSexo").charAt(0));
-       
+
         //Autores
         List<Livro> listalivros = new ArrayList<>();
         for (String id : livrosid) {
@@ -39,30 +39,6 @@
     //pego meus autores
 
     List<Livro> livros = ldao.listar();
-    
-//    String msg = "";
-//    String classe = "";
-//    Autor obj = new Autor();
-//    AutorDAO dao = new AutorDAO();
-//
-//    if (request.getParameter("txtNome") != null) {
-//        obj.setNome(request.getParameter("txtNome"));
-//        obj.setNacionalidade(request.getParameter("txtNacionalidade"));
-//        obj.setSexo(request.getParameter("txtSexo").charAt(0));
-//        obj.setFoto(request.getParameter("txtFoto"));
-//
-//        Boolean resultado = dao.incluir(obj);
-//        dao.fecharConexao();
-//        if (resultado) {
-//            msg = "Registro cadastrado com sucesso";
-//            classe = "alert-success";
-//        } else {
-//            msg = "Não foi possível cadastrar";
-//            classe = "alert-danger";
-//        }
-//    }
-
-
 %>
 <div class="row">
     <div class="col-lg-12">
@@ -93,50 +69,49 @@
             </div>
             <form action="../UploadWS" method="post" enctype="multipart/form-data">
 
-                <div class="col-lg-6">
-                    
-                       <label>Livros</label>
-                    <select name="autores" multiple>
-                        <%for (Livro l : livros) {%>
-                        <option value="<%=l.getId()%>"><%=l.getNome()%>
-                        </option>
-                        <%}%>
-                    </select>
-                </div>
+                <!--div class="col-lg-6">
+
+                    <!--                       <label>Livros</label>
+                                        <select name="autores" multiple>
+                    <%for (Livro l : livros) {%>
+                    <option value="<%=l.getId()%>"><%=l.getNome()%>
+                    </option>
+                    <%}%>
+                </select>
+                </div-->
 
                 <div class="form-group">
-                    <label>Livros com checkbox</label>
-
+                    <label>Livros</label>
                     <%for (Livro l : livros) {%>
                     <input type="checkbox" name="autoreschk" value="<%=l.getId()%>"><%=l.getNome()%>
 
-                    <%}%>
+                    <%}%> 
+                </div>
+
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input class="form-control" type="text"  name="txtNome"  required />
+                </div>
+                <div class="form-group">
+                    <label>Foto</label>
+                    <input type="file"  name="txtFoto"  />
+                </div>
+                <div class="form-group">
+                    <label>Sexo</label>
+                    <select >
+
+                        <option value='M'>Masculino</option>
+                        <option value='F'>Feminino</option>
+
                     </select>
-
-                    <div class="form-group">
-                        <label>Nome</label>
-                        <input class="form-control" type="text"  name="txtNome"  required />
-                    </div>
-                    <div class="form-group">
-                        <label>Foto</label>
-                        <input type="file"  name="txtFoto"  />
-                    </div>
-                    <div class="form-group">
-                        <label>Sexo</label>
-                        <select >
-
-                            <option value='M'>Masculino</option>
-                            <option value='F'>Feminino</option>
-
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Nacionalidade</label>
-                        <input class="form-control" type="text"  name="txtNacionalidade"  required />
-                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Nacionalidade</label>
+                    <input class="form-control" type="text"  name="txtNacionalidade"  required />
+                </div>
 
 
-                    <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
+                <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
 
             </form>
 

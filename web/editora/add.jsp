@@ -66,7 +66,7 @@
                     </div>
                     <div class="form-group">
                         <label>Logo</label>
-                        <input class="form-control" type="foto"  name="Foto"  required />
+                        <input type="file"  name="Foto"/>
                     </div>
 
                     <button class="btn btn-primary btn-sm" type="submit">Salvar</button>

@@ -1,3 +1,8 @@
+
+<%@page import="dao.EditoraDAO"%>
+<%@page import="modelo.Editora"%>
+<%@page import="modelo.Categoria"%>
+<%@page import="dao.CategoriaDAO"%>
 <%@page import="java.util.Date"%>
 <%@page import="dao.AutorDAO"%>
 <%@page import="java.util.ArrayList"%>
@@ -13,15 +18,19 @@
     String msg = "";
     String classe = "";
     AutorDAO adao = new AutorDAO();
+    CategoriaDAO cdao = new CategoriaDAO();
+    EditoraDAO edao = new EditoraDAO();
+
     if (request.getMethod().equals("POST")) {
         //pego uma lista de autores(com mesmo name)
         String[] autoresid = request.getParameter("autores").split(";");////Sempre que for n p n o upd tem q ser assim
-        //popular o livro
+        String[] categoriasid = request.getParameter("categoria").split(";");
+        String[] editorasid = request.getParameter("editora").split(";");
+        //LIVRO
         Livro l = new Livro();
-        l.setNome("StorTroopers - Uma viagem que nao sai");
+        l.setNome("StormTroopers - Uma viagem que nao sai");
         l.setDatapublicacao(new Date());
         l.setPreco(13.12f);
-        
         //Autores
         List<Autor> listaautores = new ArrayList<>();
         for (String id : autoresid) {
@@ -30,33 +39,29 @@
         }
         l.setAutorList(listaautores);
 
+        //CATEGORIA
+        List<Categoria> listacategorias = new ArrayList<>();
+        for (String id : categoriasid) {
+            Integer idinteger = Integer.parseInt(id);
+            listacategorias.add(cdao.buscarPorChavePrimaria(idinteger));
+        }
+        l.setCategoriaList(listacategorias);
+        
+        ///EDITORA
+        List<Editora> listaeditoras = new ArrayList<>();
+        for (String id : editorasid){
+            Integer idinteger = Integer.parseInt(id);
+            listaeditoras.add(edao.buscarPorChavePrimaria(idinteger));
+        }
+        l.setEditoraList(listaeditoras);
+            
         LivroDAO dao = new LivroDAO();
         dao.incluir(l);
-
     }
     //pego meus autores
     List<Autor> autores = adao.listar();
-////    if (request.getParameter("txtNome") != "findFilter") {
-////        obj.setNome(request.getParameter("txtNome"));
-////        obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
-//////        obj.setDatapublicacao(StormData.formata(Date data,String formata));
-//////        obj.setCategoria(Integer.parseInt(request.getParameter("txtCategoria")));
-//////        obj.setEditora((request.getParameter("txtEditora")));
-////        obj.setImagem1(request.getParameter("txtImagem1"));
-////        obj.setImagem2(request.getParameter("txtImagem2"));
-////        obj.setImagem3(request.getParameter("txtImagem3"));
-////        obj.setSinopse(request.getParameter(""));
-////        Boolean resultado = dao.incluir(obj);
-////        dao.fecharConexao();
-////        if (resultado) {
-////            msg = "Registro cadastrado com sucesso";
-////            classe = "alert-success";
-////        } else {
-////            msg = "Não foi possível cadastrar";
-////            classe = "alert-danger";
-////        }
-////    } 
-////    
+    List<Categoria> categorias = cdao.listar();
+    List<Editora> editoras = edao.listar();
 
 %>
 <div class="row">
@@ -88,19 +93,8 @@
             </div>
             <form action="../UploadWS" method="post" enctype="multipart/form-data">
 
-                <div class="col-lg-6">
-                    <label>Autores</label>
-                    <select name="autores" multiple>
-                        <%for (Autor a : autores) {%>
-                        <option value="<%=a.getId()%>"><%=a.getNome()%>
-                        </option>
-                        <%}%>
-                    </select>
-                </div>
-
                 <div class="form-group">
-                    <label>Autores com checkbox</label>
-
+                    <label>Autores</label>
                     <%for (Autor a : autores) {%>
                     <input type="checkbox" name="autoreschk" value="<%=a.getId()%>"><%=a.getNome()%>
 
@@ -121,12 +115,16 @@
                 </div>
                 <div class="form-group">
                     <label>Categoria</label>
-                    <input class="form-control" type="number"  name="txtCategoria"  required />
-                </div>
+                    <%for (Categoria c : categorias) {%>
+                    <input type="checkbox" name="autoreschk" value="<%=c.getId()%>"><%=c.getNome()%>
+
+                    <%}%>                </div>
                 <div class="form-group">
                     <label>Editora</label>
-                    <input class="form-control" type="text"  name="txtEditora"  required />
-                </div>
+                    <%for (Editora e : editoras) {%>
+                    <input type="checkbox" name="autoreschk" value="<%=e.getCnpj()%>"><%=e.getNome()%>
+
+                    <%}%>                 </div>
                 <div class="form-group">
                     <label>Imagem1</label>
                     <input type="file"  name="txtImagem1"  />

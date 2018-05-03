@@ -16,6 +16,7 @@ String classe = "";
         obj.setId(Integer.parseInt(request.getParameter("txtCodigo")));
         obj.setNome(request.getParameter("txtNome"));
         obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
+        
 //        obj.setDatapublicacao();
 //        obj.setCategoria(Integer.parseInt(request.getParameter("txtCategoria")));
 //        obj.setEditora((request.getParameter("txtEditora")));
@@ -109,10 +110,9 @@ String classe = "";
                         <input class="form-control" type="text" name="txtEditora" required value="<%=obj.getEditora()%>" />
                     </div>
                        <div class="form-group">
-                           //////ARRUMAR AQUIIIIIIIIIIII
                         <label>Imagem1</label>
                         <input class="form-control" type="text" name="txtFoto" required value="<%=obj.getImagem1()%>" />
-                    </div>
+                       </div>         
                        <div class="form-group">
                         <label>Imagem2</label>
                         <input class="form-control" type="text" name="txtImagem2" required value="<%=obj.getImagem2()%>" />
