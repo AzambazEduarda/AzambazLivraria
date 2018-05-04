@@ -16,7 +16,6 @@ String classe = "";
         obj.setId(Integer.parseInt(request.getParameter("txtCodigo")));
         obj.setNome(request.getParameter("txtNome"));
         obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
-        
 //        obj.setDatapublicacao();
 //        obj.setCategoria(Integer.parseInt(request.getParameter("txtCategoria")));
 //        obj.setEditora((request.getParameter("txtEditora")));
@@ -24,6 +23,7 @@ String classe = "";
         obj.setImagem2(request.getParameter("txtImagem2"));
         obj.setImagem3(request.getParameter("txtImagem3"));
         obj.setSinopse(request.getParameter("txtSinopse"));
+        
         
         
         Boolean resultado = dao.alterar(obj);

@@ -1,3 +1,4 @@
+
 <%@page import="java.util.List"%>
 <%@page import="modelo.Livro"%>
 <%@page import="dao.LivroDAO"%>
@@ -23,8 +24,6 @@
         
         lista = dao.listar();
     }
-    
-    
 
 %>
 
