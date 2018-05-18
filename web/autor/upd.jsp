@@ -16,8 +16,15 @@
         obj.setId(Integer.parseInt(request.getParameter("txtId")));
         obj.setNome(request.getParameter("txtNome"));
         obj.setNacionalidade(request.getParameter("txtNacionalidade"));
-        obj.setFoto(request.getParameter("txtFoto"));
         obj.setSexo(request.getParameter("txtSexo").charAt(0));
+        if(request.getParameter("txtFoto")!=null)
+        {
+            obj.setFoto(request.getParameter("txtFoto"));
+        }
+        else
+        {
+            obj.setFoto(request.getParameter("txtFotoVelha"));
+        }
 
         Boolean resultado = dao.alterar(obj);
 
@@ -91,7 +98,10 @@
                     </div>
                     <div class="form-group">
                         <label>Foto</label>
-                        <input class="form-control" type="text" name="txtFoto" required value="<%=obj.getFoto()%>" />
+                        <input class="form-control" type="text" name="txtFoto" id="foto"
+                        <img src="../arquivos/<%=obj.getFoto()%>" id="foto"/>
+                        <input type="hidden" name="txtFotoVelha"
+                               value="<%=obj.getFoto()%>"/>
                     </div>
 
 

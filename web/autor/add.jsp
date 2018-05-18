@@ -94,7 +94,7 @@
                 </div>
                 <div class="form-group">
                     <label>Foto</label>
-                    <input type="file"  name="txtFoto"  />
+                    <input type="file"  name="txtFoto" id="foto"/>
                 </div>
                 <div class="form-group">
                     <label>Sexo</label>

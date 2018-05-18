@@ -74,6 +74,7 @@
                         <th>Nome</th>
                         <th>Preco</th>
                         <th>Datapublicacao</th>
+                        <th>Autor</th>
                         <th>Editora</th>
                         <th>Categoria</th>
                         <th>Imagem1</th>
@@ -91,9 +92,10 @@
                         <td><%=item.getId() %></td>
                         <td><%=item.getNome() %></td>
                         <td><%=item.getPreco()%></td>
+                        <td><%=item.getAutorList()%></td>
                         <td><%=item.getDatapublicacao()%></td>
-                        <td><%=item.getCategoria()%></td>
-                        <td><%=item.getEditora() %></td>
+                        <td><%=item.getCategoriaList()%></td>
+                        <td><%=item.getEditoraList()%></td>
                         <td><%=item.getImagem1() %></td>
                         <td><%=item.getImagem2() %></td>
                         <td><%=item.getImagem3() %></td>

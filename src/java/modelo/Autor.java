@@ -27,11 +27,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Autor.findAll", query = "SELECT a FROM Autor a"),
     @NamedQuery(name = "Autor.findFilter", query = "SELECT a FROM Autor a WHERE a.nome like :filtro"),
-    @NamedQuery(name = "Autor.findById", query = "SELECT a FROM Autor a WHERE a.id = :id"),
-    @NamedQuery(name = "Autor.findByNome", query = "SELECT a FROM Autor a WHERE a.nome = :nome"),
-    @NamedQuery(name = "Autor.findByNacionalidade", query = "SELECT a FROM Autor a WHERE a.nacionalidade = :nacionalidade"),
-    @NamedQuery(name = "Autor.findBySexo", query = "SELECT a FROM Autor a WHERE a.sexo = :sexo"),
-    @NamedQuery(name = "Autor.findByFoto", query = "SELECT a FROM Autor a WHERE a.foto = :foto")})
+    @NamedQuery(name = "Autor.findById", query = "SELECT a FROM Autor a WHERE a.id = :id")})
 public class Autor implements Serializable {
 
     private static final long serialVersionUID = 1L;

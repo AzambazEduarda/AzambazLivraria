@@ -33,14 +33,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Livro.findAll", query = "SELECT l FROM Livro l"), 
     @NamedQuery(name = "Livro.findFilter", query = "SELECT l FROM Livro l WHERE l.nome like :filtro"),
-    @NamedQuery(name = "Livro.findById", query = "SELECT l FROM Livro l WHERE l.id = :id"),
-    @NamedQuery(name = "Livro.findByNome", query = "SELECT l FROM Livro l WHERE l.nome = :nome"),
-    @NamedQuery(name = "Livro.findByPreco", query = "SELECT l FROM Livro l WHERE l.preco = :preco"),
-    @NamedQuery(name = "Livro.findByDatapublicacao", query = "SELECT l FROM Livro l WHERE l.datapublicacao = :datapublicacao"),
-    @NamedQuery(name = "Livro.findByImagem1", query = "SELECT l FROM Livro l WHERE l.imagem1 = :imagem1"),
-    @NamedQuery(name = "Livro.findByImagem2", query = "SELECT l FROM Livro l WHERE l.imagem2 = :imagem2"),
-    @NamedQuery(name = "Livro.findByImagem3", query = "SELECT l FROM Livro l WHERE l.imagem3 = :imagem3"),
-    @NamedQuery(name = "Livro.findBySinopse", query = "SELECT l FROM Livro l WHERE l.sinopse = :sinopse")})
+    @NamedQuery(name = "Livro.findById", query = "SELECT l FROM Livro l WHERE l.id = :id")})
 public class Livro implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -73,10 +66,10 @@ public class Livro implements Serializable {
     @ManyToMany
     private List<Autor> autorList;
     @JoinColumn(name = "categoria", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Categoria categoria;
     @JoinColumn(name = "editora", referencedColumnName = "cnpj")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Editora editora;
 
     public Livro() {

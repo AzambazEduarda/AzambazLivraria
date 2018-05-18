@@ -17,51 +17,60 @@
 <%
     String msg = "";
     String classe = "";
-    AutorDAO adao = new AutorDAO();
+    
+    Livro obj = new Livro();
+    LivroDAO dao = new LivroDAO();
+    
     CategoriaDAO cdao = new CategoriaDAO();
-    EditoraDAO edao = new EditoraDAO();
-
-    if (request.getMethod().equals("POST")) {
-        //pego uma lista de autores(com mesmo name)
-        String[] autoresid = request.getParameter("autores").split(";");////Sempre que for n p n o upd tem q ser assim
-        String[] categoriasid = request.getParameter("categoria").split(";");
-        String[] editorasid = request.getParameter("editora").split(";");
-        //LIVRO
-        Livro l = new Livro();
-        l.setNome("StormTroopers - Uma viagem que nao sai");
-        l.setDatapublicacao(new Date());
-        l.setPreco(13.12f);
-        //Autores
-        List<Autor> listaautores = new ArrayList<>();
-        for (String id : autoresid) {
-            Integer idinteger = Integer.parseInt(id);
-            listaautores.add(adao.buscarPorChavePrimaria(idinteger));
-        }
-        l.setAutorList(listaautores);
-
-        //CATEGORIA
-        List<Categoria> listacategorias = new ArrayList<>();
-        for (String id : categoriasid) {
-            Integer idinteger = Integer.parseInt(id);
-            listacategorias.add(cdao.buscarPorChavePrimaria(idinteger));
-        }
-        l.setCategoriaList(listacategorias);
+    List <Categoria> clistar = cdao.listar();
+    Categoria c = new Categoria();
+    
+    EditoraDAO edao= new EditoraDAO();
+    List<Editora> elistar = edao.listar();
+    Editora e = new Editora();
+    
+    AutorDAO adao = new AutorDAO();
+    List<Autor> alistar = adao.listar();
+    
+    if(request.getMethod().equals("POST")){
+        String[] autoresid = request.getParameter("autores").split(";");
         
-        ///EDITORA
-        List<Editora> listaeditoras = new ArrayList<>();
-        for (String id : editorasid){
-            Integer idinteger = Integer.parseInt(id);
-            listaeditoras.add(edao.buscarPorChavePrimaria(idinteger));
-        }
-        l.setEditoraList(listaeditoras);
+        if(request.getParameter("txtNome") !=null && request.getParameter("txtPreco") != null && request.getParameter("txtDataPublicacao")
+                != null && request.getParameter("txtSinopse") != null && request.getParameter("txtImagem1")!= null
+                && request.getParameter("txtImagem2")!= null && request.getParameter("txtImagem3")!= null);
+        {
+            obj.setNome(request.getParameter("txtNome"));
+            obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
+            obj.setDatapublicacao(StormData.formata(request.getParameter("txtDataPublicacao")));
+            obj.setSinopse(request.getParameter("txtSinopse"));
+            c.setId(Integer.parseInt(request.getParameter("txtCategoria")));
+            e.setCnpj(request.getParameter("txtEditora"));
+            obj.setCategoria(c);
+            obj.setEditora(e);
+            obj.setImagem1(request.getParameter("txtImagem1"));
+            obj.setImagem2(request.getParameter("txtImagem2"));
+            obj.setImagem3(request.getParameter("txtImagem3"));
             
-        LivroDAO dao = new LivroDAO();
-        dao.incluir(l);
+            List<Autor> listaautores = new ArrayList<>();
+            for (String id : autoresid){
+                 Integer idinteger = Integer.parseInt(id);
+                 listaautores.add(adao.buscarPorChavePrimaria(idinteger));
+            }
+            obj.setAutorList(listaautores);
+            Boolean resultado = dao.incluir(obj);
+            if(resultado){
+                msg = "Registro cadastrado com sucess";
+                classe = "alert-success";
+            }
+            else{
+                msg = "Não foi possivel cadastrar";
+                classe = "alert-danger";
+            }
+            
+        }
     }
-    //pego meus autores
-    List<Autor> autores = adao.listar();
-    List<Categoria> categorias = cdao.listar();
-    List<Editora> editoras = edao.listar();
+    dao.fecharConexao();
+    
 
 %>
 <div class="row">
@@ -95,8 +104,8 @@
 
                 <div class="form-group">
                     <label>Autores</label>
-                    <%for (Autor a : autores) {%>
-                    <input type="checkbox" name="autoreschk" value="<%=a.getId()%>"><%=a.getNome()%>
+                    <%for (Autor item:alistar ) {%>
+                    <input type="checkbox" name="autoreschk" value="<%=item.getId()%>"><%=item.getNome()%>
 
                     <%}%>
                     </select>
@@ -111,18 +120,18 @@
                 </div>
                 <div class="form-group">
                     <label>Data da Publicacao</label>
-                    <input class="form-control" type="number"  name="txtDataDaPublicacao"  required />
+                    <input class="form-control" type="date"  name="txtDataDaPublicacao"  required />
                 </div>
                 <div class="form-group">
                     <label>Categoria</label>
-                    <%for (Categoria c : categorias) {%>
-                    <input type="checkbox" name="autoreschk" value="<%=c.getId()%>"><%=c.getNome()%>
+                    <%for (Categoria item:clistar) {%>
+                    <input type="checkbox" name="autoreschk" value="<%=item.getId()%>"><%=item.getNome()%>
 
                     <%}%>                </div>
                 <div class="form-group">
                     <label>Editora</label>
-                    <%for (Editora e : editoras) {%>
-                    <input type="checkbox" name="autoreschk" value="<%=e.getCnpj()%>"><%=e.getNome()%>
+                    <%for (Editora item:elistar) {%>
+                    <input type="checkbox" name="autoreschk" value="<%=item.getCnpj()%>"><%=item.getNome()%>
 
                     <%}%>                 </div>
                 <div class="form-group">

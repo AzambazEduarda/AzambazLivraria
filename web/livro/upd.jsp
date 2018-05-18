@@ -1,4 +1,9 @@
 
+<%@page import="modelo.Categoria"%>
+<%@page import="util.StormData"%>
+<%@page import="modelo.Autor"%>
+<%@page import="modelo.Editora"%>
+<%@page import="java.util.List"%>
 <%@page import="java.math.BigDecimal"%>
 <%@page import="modelo.Livro"%>
 <%@page import="dao.LivroDAO"%>
@@ -9,20 +14,23 @@ String classe = "";
     
     LivroDAO dao = new LivroDAO();
     Livro obj = new Livro();
+    
+    Categoria c = new Categoria();
+    Editora e = new Editora();
     //verifica se é postm ou seja, quer alterar
     if(request.getMethod().equals("POST")){
         
-        //popular com oq ele digitou no form
-        obj.setId(Integer.parseInt(request.getParameter("txtCodigo")));
-        obj.setNome(request.getParameter("txtNome"));
-        obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
-//        obj.setDatapublicacao();
-//        obj.setCategoria(Integer.parseInt(request.getParameter("txtCategoria")));
-//        obj.setEditora((request.getParameter("txtEditora")));
-        obj.setImagem1(request.getParameter("txtImagem1"));
-        obj.setImagem2(request.getParameter("txtImagem2"));
-        obj.setImagem3(request.getParameter("txtImagem3"));
-        obj.setSinopse(request.getParameter("txtSinopse"));
+            obj.setNome(request.getParameter("txtNome"));
+            obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
+            obj.setDatapublicacao(StormData.formata(request.getParameter("txtDataPublicacao")));
+            obj.setSinopse(request.getParameter("txtSinopse"));
+            c.setId(Integer.parseInt(request.getParameter("txtCategoria")));
+            e.setCnpj(request.getParameter("txtEditora"));
+            obj.setCategoria(c);
+            obj.setEditora(e);
+            obj.setImagem1(request.getParameter("txtImagem1"));
+            obj.setImagem2(request.getParameter("txtImagem2"));
+            obj.setImagem3(request.getParameter("txtImagem3"));
         
         
         
@@ -99,7 +107,11 @@ String classe = "";
                     </div>
                     <div class="form-group">
                         <label>Data da Publicacao</label>
-                        <input class="form-control" type="number" name="txtDataDaPublicacao" required value="<%=obj.getDatapublicacao()%>" />
+                        <input class="form-control" type="date" name="txtDataDaPublicacao" required value="<%=obj.getDatapublicacao()%>" />
+                    </div>
+                     <div class="form-group">
+                        <label>Autor</label>
+                        <input class="form-control" type="text" name="txtAutor" required value="<%=obj.getAutorList() %>" />
                     </div>
                        <div class="form-group">
                         <label>Categoria</label>
