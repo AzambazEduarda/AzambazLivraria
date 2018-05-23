@@ -3,10 +3,10 @@
   <persistence-unit name="AzambazLivrariaPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>modelo.Categoria</class>
-    <class>modelo.Livro</class>
     <class>modelo.AutorLivro</class>
     <class>modelo.Editora</class>
     <class>modelo.Autor</class>
+    <class>modelo.Livro</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/AzambazLivraria"/>

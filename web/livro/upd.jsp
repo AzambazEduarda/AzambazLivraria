@@ -22,6 +22,7 @@ String classe = "";
         
             obj.setNome(request.getParameter("txtNome"));
             obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
+//            obj.setAutorList();
             obj.setDatapublicacao(StormData.formata(request.getParameter("txtDataPublicacao")));
             obj.setSinopse(request.getParameter("txtSinopse"));
             c.setId(Integer.parseInt(request.getParameter("txtCategoria")));
@@ -31,6 +32,7 @@ String classe = "";
             obj.setImagem1(request.getParameter("txtImagem1"));
             obj.setImagem2(request.getParameter("txtImagem2"));
             obj.setImagem3(request.getParameter("txtImagem3"));
+          
         
         
         

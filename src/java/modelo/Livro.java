@@ -20,20 +20,21 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author aluno
+ * @author J
  */
 @Entity
-@Table(name = "livro")
+@Table(name = "Livro")
 @NamedQueries({
-    @NamedQuery(name = "Livro.findAll", query = "SELECT l FROM Livro l"), 
-    @NamedQuery(name = "Livro.findFilter", query = "SELECT l FROM Livro l WHERE l.nome like :filtro"),
-    @NamedQuery(name = "Livro.findById", query = "SELECT l FROM Livro l WHERE l.id = :id")})
+    @NamedQuery(name = "Livro.findAll", query = "SELECT l FROM Livro l"),
+    @NamedQuery(name = "Livro.findFilter",query = "SELECT l FROM Livro l WHERE l.nome like :filtro")})
 public class Livro implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,24 +53,31 @@ public class Livro implements Serializable {
     @Column(name = "datapublicacao")
     @Temporal(TemporalType.DATE)
     private Date datapublicacao;
+    @Basic(optional = false)
+    @Column(name = "sinopse")
+    private String sinopse;
+    //@Basic(optional = false);
+//    @Column(name = "categoria");
+//    private Categoria categoria;
     @Column(name = "imagem1")
     private String imagem1;
     @Column(name = "imagem2")
     private String imagem2;
     @Column(name = "imagem3")
     private String imagem3;
-    @Column(name = "sinopse")
-    private String sinopse;
-    @JoinTable(name = "autor_livro", joinColumns = {
+   
+    
+      @JoinTable(name = "autor_livro", joinColumns = {
         @JoinColumn(name = "livro", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "autor", referencedColumnName = "id")})
     @ManyToMany
+  
     private List<Autor> autorList;
     @JoinColumn(name = "categoria", referencedColumnName = "id")
-    @ManyToOne
+    @OneToOne(optional = false)
     private Categoria categoria;
     @JoinColumn(name = "editora", referencedColumnName = "cnpj")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Editora editora;
 
     public Livro() {
@@ -79,11 +87,12 @@ public class Livro implements Serializable {
         this.id = id;
     }
 
-    public Livro(Integer id, String nome, float preco, Date datapublicacao) {
+    public Livro(Integer id, String nome, float preco, Date datapublicacao, String sinopse) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
         this.datapublicacao = datapublicacao;
+        this.sinopse = sinopse;
     }
 
     public Integer getId() {
@@ -118,6 +127,22 @@ public class Livro implements Serializable {
         this.datapublicacao = datapublicacao;
     }
 
+    public String getSinopse() {
+        return sinopse;
+    }
+
+    public void setSinopse(String sinopse) {
+        this.sinopse = sinopse;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     public String getImagem1() {
         return imagem1;
     }
@@ -142,14 +167,7 @@ public class Livro implements Serializable {
         this.imagem3 = imagem3;
     }
 
-    public String getSinopse() {
-        return sinopse;
-    }
-
-    public void setSinopse(String sinopse) {
-        this.sinopse = sinopse;
-    }
-
+    @XmlTransient
     public List<Autor> getAutorList() {
         return autorList;
     }
@@ -158,13 +176,13 @@ public class Livro implements Serializable {
         this.autorList = autorList;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
+//    public Categoria getCategoria1() {
+//        return categoria1;
+//    }
+//
+//    public void setCategoria1(Categoria categoria1) {
+//        this.categoria1 = categoria1;
+//    }
 
     public Editora getEditora() {
         return editora;

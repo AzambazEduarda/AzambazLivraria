@@ -36,8 +36,8 @@
         String[] autoresid = request.getParameter("autores").split(";");
         
         if(request.getParameter("txtNome") !=null && request.getParameter("txtPreco") != null && request.getParameter("txtDataPublicacao")
-                != null && request.getParameter("txtSinopse") != null && request.getParameter("txtImagem1")!= null
-                && request.getParameter("txtImagem2")!= null && request.getParameter("txtImagem3")!= null);
+                != null && request.getParameter("txtSinopse") != null && request.getParameter("txtCategoria") != null &&
+                request.getParameter("txtEditora")!= null);
         {
             obj.setNome(request.getParameter("txtNome"));
             obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
@@ -120,20 +120,34 @@
                 </div>
                 <div class="form-group">
                     <label>Data da Publicacao</label>
-                    <input class="form-control" type="date"  name="txtDataDaPublicacao"  required />
+                    <input class="form-control" type="date"  name="txtDataPublicacao"  required />
                 </div>
                 <div class="form-group">
+                    <select name="txtCategoria" required />
+                    
                     <label>Categoria</label>
                     <%for (Categoria item:clistar) {%>
-                    <input type="checkbox" name="autoreschk" value="<%=item.getId()%>"><%=item.getNome()%>
+                  
+                    <option value="<%=item.getId()%>">
+                        <%=item.getNome()%>
+                    </option>
 
-                    <%}%>                </div>
+                    <%}%>   
+                </select>
+                </div>
                 <div class="form-group">
+                    <select name="txtEditora" required />
                     <label>Editora</label>
                     <%for (Editora item:elistar) {%>
-                    <input type="checkbox" name="autoreschk" value="<%=item.getCnpj()%>"><%=item.getNome()%>
+                   
+                    <option value="<%=item.getCnpj()%>">
+                        <%=item.getNome()%>
+                    </option>
+                    
 
-                    <%}%>                 </div>
+                    <%}%> 
+                </select> 
+                </div>
                 <div class="form-group">
                     <label>Imagem1</label>
                     <input type="file"  name="txtImagem1"  />
