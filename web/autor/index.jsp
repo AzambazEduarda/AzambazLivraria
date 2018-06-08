@@ -61,7 +61,7 @@
     <div class="panel panel-default">
         <form action="#" method="post">
             <div class="form-group input-group">
-                <input type="text" class="form-control" name="txtFiltro" placeholder="digite...">
+                <input type="text" class="form-control" name="txtFiltro" placeholder="digita aqui oh abestado...">
                 <span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button></span>
             </div>
         </form>
