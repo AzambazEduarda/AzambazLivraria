@@ -3,7 +3,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Store Template</title>
+	<title>Livraria Azambaz</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
@@ -65,25 +65,26 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-2">
-							<div id="colorlib-logo"><a href="index.html">Store</a></div>
+							<div id="colorlib-logo"><a href="index.html">Freak Store</a></div>
 						</div>
 						<div class="col-xs-10 text-right menu-1">
 							<ul>
 								<li class="active"><a href="index.html">Home</a></li>
 								<li class="has-dropdown">
-									<a href="shop.html">Shop</a>
+									<a href="shop.html">Comprar</a>
 									<ul class="dropdown">
-										<li><a href="product-detail.html">Product Detail</a></li>
-										<li><a href="cart.html">Shipping Cart</a></li>
-										<li><a href="checkout.html">Checkout</a></li>
-										<li><a href="order-complete.html">Order Complete</a></li>
-										<li><a href="add-to-wishlist.html">Wishlist</a></li>
+										<li><a href="product-detail.html">Detalhes do produto</a></li>
+										<li><a href="cart.html">Carrinho</a></li>
+										<li><a href="checkout.html">Confira</a></li>
+										<li><a href="order-complete.html">Pedido Completo</a></li>
+										<li><a href="add-to-wishlist.html">Lista de Desejos</a></li>
 									</ul>
 								</li>
-								<li><a href="blog.html">Blog</a></li>
-								<li><a href="about.html">About</a></li>
-								<li><a href="contact.html">Contact</a></li>
-								<li><a href="cart.html"><i class="icon-shopping-cart"></i> Cart [0]</a></li>
+								<li><a href="blog.html">Categorias</a></li>
+								<li><a href="about.html">Autor</a></li>
+								<li><a href="contact.html">Livro</a></li>
+                                                                <li><a href="contact.html">Editora</a></li>
+								<li><a href="cart.html"><i class="icon-shopping-cart"></i> Carrinho [0]</a></li>
 							</ul>
 						</div>
 					</div>
