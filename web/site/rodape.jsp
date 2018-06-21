@@ -36,8 +36,7 @@
 								<li><a href="#"><i class="icon-linkedin"></i></a></li>
 								<li><a href="#"><i class="icon-dribbble"></i></a></li>
 							</ul>
-						</p>
-					</div>
+										</div>
 					<div class="col-md-2 colorlib-widget">
 						<h4>Atendimento ao consumidor</h4>
 						<p>
@@ -49,7 +48,7 @@
 								<li><a href="#">Atendimento ao cliente.</a></li>
 								<li><a href="#">Site mapas</a></li>
 							</ul>
-						</p>
+					
 					</div>
 					<div class="col-md-2 colorlib-widget">
 						<h4>Informações</h4>
@@ -61,7 +60,7 @@
 								<li><a href="#">Suporte</a></li>
 								<li><a href="#">Rastreamento de pedidos</a></li>
 							</ul>
-						</p>
+						
 					</div>
 
 					<div class="col-md-2">
@@ -98,8 +97,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script>Todos 
 				</div>
 			</div>
 		</footer>
-	</div>
-
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up2"></i></a>
 	</div>

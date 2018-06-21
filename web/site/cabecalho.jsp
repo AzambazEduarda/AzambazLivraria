@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -80,7 +81,10 @@
 										<li><a href="add-to-wishlist.html">Lista de Desejos</a></li>
 									</ul>
 								</li>
-								<li><a href="blog.html">Categorias</a></li>
+								<li><a href="blog.html">Categorias</a>     
+                                                                    
+                                                                </li>
+                                                                
 								<li><a href="about.html">Autor</a></li>
 								<li><a href="contact.html">Livro</a></li>
                                                                 <li><a href="contact.html">Editora</a></li>
