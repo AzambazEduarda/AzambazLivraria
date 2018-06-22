@@ -5,8 +5,21 @@
 <%@page import="dao.LivroDAO"%>
 <%
     LivroDAO ldao = new LivroDAO();
-    List<Livro> lista = ldao.listar();
+    List<Livro> lista;
+    ////SE É FILTRO POR CATEGORIA
+    if(request.getParameter("categoriaid")!=null){
+
+        Integer id = 
+                Integer.parseInt(request.getParameter("categoriaid"));
+        Categoria c= cdao.buscarPorChavePrimaria(id);
+        lista = c.getLivroList();
+    }
+    else{
+        lista = ldao.listar();
+    }
+        
     ldao.fecharConexao();
+    
 %>
 
 <div class="colorlib-shop">

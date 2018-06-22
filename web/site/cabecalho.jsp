@@ -1,4 +1,15 @@
-
+<%@page import="modelo.Autor"%>
+<%@page import="dao.AutorDAO"%>
+<%@page import="modelo.Categoria"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.CategoriaDAO"%>
+<%
+        CategoriaDAO cdao = new CategoriaDAO();
+    List<Categoria> clista = cdao.listar();
+    
+    AutorDAO adao = new AutorDAO();
+    List<Autor> alista = adao.listar();
+%>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -16,10 +27,10 @@
 	<meta property="og:url" content=""/>
 	<meta property="og:site_name" content=""/>
 	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
+<!--	<meta name="twitter:title" content="" />
 	<meta name="twitter:image" content="" />
 	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
+	<meta name="twitter:card" content="" />-->
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
 	
@@ -72,20 +83,31 @@
 							<ul>
 								<li class="active"><a href="index.html">Home</a></li>
 								<li class="has-dropdown">
-									<a href="shop.html">Comprar</a>
+									<a href="index.jsp">Categoria</a>
 									<ul class="dropdown">
-										<li><a href="product-detail.html">Detalhes do produto</a></li>
-										<li><a href="cart.html">Carrinho</a></li>
-										<li><a href="checkout.html">Confira</a></li>
-										<li><a href="order-complete.html">Pedido Completo</a></li>
-										<li><a href="add-to-wishlist.html">Lista de Desejos</a></li>
+                                                                            <% for (Categoria c: clista){
+                                                                                
+                                                                            %>
+										<li><a href="index.jsp?categoriaid=><%=c.getId()%>">
+                                                                                    <%=c.getNome()%></a></li>
+									<%}                                                                                        
+                                                                    %>
 									</ul>
 								</li>
-								<li><a href="blog.html">Categorias</a>     
-                                                                    
-                                                                </li>
                                                                 
-								<li><a href="about.html">Autor</a></li>
+                                                                <li class="has-dropdown">
+									<a href="index.jsp">Autor</a>
+									<ul class="dropdown">
+                                                                            <%for (Autor a :alista){
+                                                                                
+                                                                            %>
+                 								<li><a href="index.jsp?autorid=><%=a.getId()%>">
+                                                                                     <%=a.getNome()%></a></li>
+                                                                        <%}
+                                                                                
+                                                                    %>
+                            
+       
 								<li><a href="contact.html">Livro</a></li>
                                                                 <li><a href="contact.html">Editora</a></li>
 								<li><a href="cart.html"><i class="icon-shopping-cart"></i> Carrinho [0]</a></li>
