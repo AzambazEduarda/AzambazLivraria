@@ -3,7 +3,8 @@
 <%@page import="modelo.Livro"%>
 <%@include file="cabecalho.jsp" %>
 <%   
-    if (request.getParameter("id") == null) {
+    if (request.getParameter("id") == null) 
+    {
         response.sendRedirect("index.jsp");
         return;
     }
@@ -63,7 +64,8 @@
                                         (74 Rating)
                                     </span>
                                 </p>
-                                <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+                                <!-- FAZER O DETALHE DO LIVRO -->
+                                <p>SINOPSEEEEEEEEEE</p>
                                 <div class="color-wrap">
                                     <p class="color-desc">
                                         Color: 

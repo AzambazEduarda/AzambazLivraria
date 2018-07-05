@@ -3,23 +3,23 @@
 <%@page import="modelo.Livro"%>
 <%@page import="java.util.List"%>
 <%@page import="dao.LivroDAO"%>
-<%
+<%    
     LivroDAO ldao = new LivroDAO();
     List<Livro> lista;
     ////SE É FILTRO POR CATEGORIA
-    if(request.getParameter("categoriaid")!=null){
-
-        Integer id = 
-                Integer.parseInt(request.getParameter("categoriaid"));
-        Categoria c= cdao.buscarPorChavePrimaria(id);
+    if (request.getParameter("categoriaid") != null)
+    {
+        Integer id= Integer.parseInt(request.getParameter("categoriaid"));
+        Categoria c = cdao.buscarPorChavePrimaria(id);
         lista = c.getLivroList();
-    }
-    else{
+    } 
+    else 
+    {
         lista = ldao.listar();
     }
-        
+
     ldao.fecharConexao();
-    
+
 %>
 
 <div class="colorlib-shop">
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="row">
-             <%for(Livro item: lista){%>
+            <% for (Livro item : lista) {%>
             <div class="col-md-3 text-center">
                 <div class="product-entry">
                     <div class="product-img">
@@ -40,7 +40,7 @@
                         <div class="cart">
                             <p>
                                 <span class="addtocart"><a href="cart.html"><i class="icon-shopping-cart"></i></a></span> 
-                                <span><a href="product-detail.html"><i class="icon-eye"></i></a></span> 
+                                <span><a href="produto.jsp?id=<%=item.getId()%>"><i class="icon-eye"></i></a></span> 
                                 <span><a href="#"><i class="icon-heart3"></i></a></span>
                                 <span><a href="add-to-wishlist.html"><i class="icon-bar-chart"></i></a></span>
                             </p>
@@ -49,9 +49,9 @@
                     <div class="desc">
                         <h3><a href="shop.html"><%=item.getNome()%></a></h3>
                         <p class="price"><span><%=item.getPreco()%></span></p>
-                         
+
                     </div>
                 </div>
             </div>
-            <% }  %>
+            <% }%>
 <%@include file="rodape.jsp" %>

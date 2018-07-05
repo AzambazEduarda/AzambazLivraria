@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,21 +21,24 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author J
+ * @author aluno
  */
 @Entity
-@Table(name = "Livro")
+@Table(name = "livro")
 @NamedQueries({
     @NamedQuery(name = "Livro.findAll", query = "SELECT l FROM Livro l"),
-    @NamedQuery(name = "Livro.findFilter",query = "SELECT l FROM Livro l WHERE l.nome like :filtro")})
+    @NamedQuery(name = "Livro.findFilter",
+            query = "SELECT l FROM Livro l WHERE UPPER (l.nome) like :filtro"),
+    })
+    
+
 public class Livro implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -53,32 +57,28 @@ public class Livro implements Serializable {
     @Column(name = "datapublicacao")
     @Temporal(TemporalType.DATE)
     private Date datapublicacao;
-    @Basic(optional = false)
-    @Column(name = "sinopse")
-    private String sinopse;
-    //@Basic(optional = false);
-//    @Column(name = "categoria");
-//    private Categoria categoria;
     @Column(name = "imagem1")
     private String imagem1;
     @Column(name = "imagem2")
     private String imagem2;
     @Column(name = "imagem3")
     private String imagem3;
-   
-    
-      @JoinTable(name = "autor_livro", joinColumns = {
+    @Column(name = "sinopse")
+    private String sinopse;
+     @JoinTable(name = "autor_livro", joinColumns = {
         @JoinColumn(name = "livro", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "autor", referencedColumnName = "id")})
     @ManyToMany
-  
-    private List<Autor> autorList;
-    @JoinColumn(name = "categoria", referencedColumnName = "id")
-    @OneToOne(optional = false)
-    private Categoria categoria;
+    private List<Autor> autorlist;
+    @JoinColumn (name ="categoria", referencedColumnName = "id")
+    @ManyToOne (optional = false)
+    private String categoria;
+    
     @JoinColumn(name = "editora", referencedColumnName = "cnpj")
     @ManyToOne(optional = false)
     private Editora editora;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "livro")
+    private List<Compralivro> compralivroList;
 
     public Livro() {
     }
@@ -87,12 +87,11 @@ public class Livro implements Serializable {
         this.id = id;
     }
 
-    public Livro(Integer id, String nome, float preco, Date datapublicacao, String sinopse) {
+    public Livro(Integer id, String nome, float preco, Date datapublicacao) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
         this.datapublicacao = datapublicacao;
-        this.sinopse = sinopse;
     }
 
     public Integer getId() {
@@ -127,22 +126,6 @@ public class Livro implements Serializable {
         this.datapublicacao = datapublicacao;
     }
 
-    public String getSinopse() {
-        return sinopse;
-    }
-
-    public void setSinopse(String sinopse) {
-        this.sinopse = sinopse;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
     public String getImagem1() {
         return imagem1;
     }
@@ -167,22 +150,29 @@ public class Livro implements Serializable {
         this.imagem3 = imagem3;
     }
 
-    @XmlTransient
-    public List<Autor> getAutorList() {
-        return autorList;
+    public String getSinopse() {
+        return sinopse;
     }
 
-    public void setAutorList(List<Autor> autorList) {
-        this.autorList = autorList;
+    public void setSinopse(String sinopse) {
+        this.sinopse = sinopse;
     }
 
-//    public Categoria getCategoria1() {
-//        return categoria1;
-//    }
-//
-//    public void setCategoria1(Categoria categoria1) {
-//        this.categoria1 = categoria1;
-//    }
+    public List<Autor> getAutorlist() {
+        return autorlist;
+    }
+
+    public void setAutorlist(List<Autor> autorlist) {
+        this.autorlist = autorlist;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
 
     public Editora getEditora() {
         return editora;
@@ -190,6 +180,14 @@ public class Livro implements Serializable {
 
     public void setEditora(Editora editora) {
         this.editora = editora;
+    }
+
+    public List<Compralivro> getCompralivroList() {
+        return compralivroList;
+    }
+
+    public void setCompralivroList(List<Compralivro> compralivroList) {
+        this.compralivroList = compralivroList;
     }
 
     @Override

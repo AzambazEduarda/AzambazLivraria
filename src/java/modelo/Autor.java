@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,8 +28,9 @@ import javax.persistence.Table;
 @Table(name = "autor")
 @NamedQueries({
     @NamedQuery(name = "Autor.findAll", query = "SELECT a FROM Autor a"),
-    @NamedQuery(name = "Autor.findFilter", query = "SELECT a FROM Autor a WHERE a.nome like :filtro"),
-    @NamedQuery(name = "Autor.findById", query = "SELECT a FROM Autor a WHERE a.id = :id")})
+    @NamedQuery(name = "Autor.findFilter",
+            query = "SELECT a FROM Autor a WHERE UPPER (a.nome) like :filtro"),
+    })
 public class Autor implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,7 +50,10 @@ public class Autor implements Serializable {
     private Character sexo;
     @Column(name = "foto")
     private String foto;
-    @ManyToMany(mappedBy = "autorList")
+//    @JoinTable(name = "autor_livro", joinColumns = {
+//        @JoinColumn(name = "autor", referencedColumnName = "id")}, inverseJoinColumns = {
+//        @JoinColumn(name = "livro", referencedColumnName = "id")})
+    @ManyToMany (mappedBy = "autorList")
     private List<Livro> livroList;
 
     public Autor() {

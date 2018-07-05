@@ -4,116 +4,118 @@
 <%@page import="java.util.List"%>
 <%@page import="dao.CategoriaDAO"%>
 <%
-        CategoriaDAO cdao = new CategoriaDAO();
+    CategoriaDAO cdao = new CategoriaDAO();
     List<Categoria> clista = cdao.listar();
-    
+
     AutorDAO adao = new AutorDAO();
     List<Autor> alista = adao.listar();
 %>
 <!DOCTYPE HTML>
 <html>
-	<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Livraria Azambaz</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="author" content="" />
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Livraria Azambaz</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
 
-  <!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
-<!--	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />-->
+        <!-- Facebook and Twitter integration -->
+        <meta property="og:title" content=""/>
+        <meta property="og:image" content=""/>
+        <meta property="og:url" content=""/>
+        <meta property="og:site_name" content=""/>
+        <meta property="og:description" content=""/>
+        <!--	<meta name="twitter:title" content="" />
+                <meta name="twitter:image" content="" />
+                <meta name="twitter:url" content="" />
+                <meta name="twitter:card" content="" />-->
 
-	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
-	
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700" rel="stylesheet">
 
-	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/magnific-popup.css">
+        <!-- Animate.css -->
+        <link rel="stylesheet" href="css/animate.css">
+        <!-- Icomoon Icon Fonts-->
+        <link rel="stylesheet" href="css/icomoon.css">
+        <!-- Bootstrap  -->
+        <link rel="stylesheet" href="css/bootstrap.css">
 
-	<!-- Flexslider  -->
-	<link rel="stylesheet" href="css/flexslider.css">
+        <!-- Magnific Popup -->
+        <link rel="stylesheet" href="css/magnific-popup.css">
 
-	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
-	
-	<!-- Date Picker -->
-	<link rel="stylesheet" href="css/bootstrap-datepicker.css">
-	<!-- Flaticons  -->
-	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+        <!-- Flexslider  -->
+        <link rel="stylesheet" href="css/flexslider.css">
 
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+        <!-- Owl Carousel -->
+        <link rel="stylesheet" href="css/owl.carousel.min.css">
+        <link rel="stylesheet" href="css/owl.theme.default.min.css">
 
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
+        <!-- Date Picker -->
+        <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+        <!-- Flaticons  -->
+        <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
 
-	</head>
-	<body>
-		
-	<div class="colorlib-loader"></div>
+        <!-- Theme style  -->
+        <link rel="stylesheet" href="css/style.css">
 
-	<div id="page">
-		<nav class="colorlib-nav" role="navigation">
-			<div class="top-menu">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-2">
-							<div id="colorlib-logo"><a href="index.html">Freak Store</a></div>
-						</div>
-						<div class="col-xs-10 text-right menu-1">
-							<ul>
-								<li class="active"><a href="index.html">Home</a></li>
-								<li class="has-dropdown">
-									<a href="index.jsp">Categoria</a>
-									<ul class="dropdown">
-                                                                            <% for (Categoria c: clista){
-                                                                                
-                                                                            %>
-										<li><a href="index.jsp?categoriaid=><%=c.getId()%>">
-                                                                                    <%=c.getNome()%></a></li>
-									<%}                                                                                        
-                                                                    %>
-									</ul>
-								</li>
-                                                                
-                                                                <li class="has-dropdown">
-									<a href="index.jsp">Autor</a>
-									<ul class="dropdown">
-                                                                            <%for (Autor a :alista){
-                                                                                
-                                                                            %>
-                 								<li><a href="index.jsp?autorid=><%=a.getId()%>">
-                                                                                     <%=a.getNome()%></a></li>
-                                                                        <%}
-                                                                                
-                                                                    %>
-                            
-       
-								<li><a href="contact.html">Livro</a></li>
-                                                                <li><a href="contact.html">Editora</a></li>
-								<li><a href="cart.html"><i class="icon-shopping-cart"></i> Carrinho [0]</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</nav>
+        <!-- Modernizr JS -->
+        <script src="js/modernizr-2.6.2.min.js"></script>
+        <!-- FOR IE9 below -->
+        <!--[if lt IE 9]>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+    <body>
+
+        <div class="colorlib-loader"></div>
+
+        <div id="page">
+            <nav class="colorlib-nav" role="navigation">
+                <div class="top-menu">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <div id="colorlib-logo"><a href="index.html">Freak Store</a></div>
+                            </div>
+                            <div class="col-xs-10 text-right menu-1">
+                                <ul>
+                                    <li class="active"><a href="index.html">Home</a></li>
+
+                                    <!-- CATEGORIA -->
+                                    <li class="has-dropdown">
+                                        <a href="index.jsp">Categoria</a>
+                                        <ul class="dropdown">
+                                            <% for (Categoria c : clista) {
+
+                                            %>
+                                            <li><a href="index.jsp?categoriaid=><%=c.getId()%>">
+                                                    <%=c.getNome()%></a></li>
+                                                    <%}
+                                                    %>
+                                        </ul>
+                                    </li>
+                                    <!-- AUTOR -->
+                                    <li class="has-dropdown">
+                                        <a href="index.jsp">Autor</a>
+                                        <ul class="dropdown">
+                                            <%for (Autor a : alista) {
+
+                                            %>
+                                            <li><a href="index.jsp?autorid=><%=a.getId()%>">
+                                                    <%=a.getNome()%></a></li>
+                                                    <%}
+
+                                                    %>
+
+
+                                            <li><a href="contact.html">Livro</a></li>
+                                            <li><a href="contact.html">Editora</a></li>
+                                            <li><a href="cart.html"><i class="icon-shopping-cart"></i> Carrinho [0]</a></li>
+                                        </ul>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </nav>

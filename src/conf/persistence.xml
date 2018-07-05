@@ -7,6 +7,9 @@
     <class>modelo.Editora</class>
     <class>modelo.Autor</class>
     <class>modelo.Livro</class>
+    <class>modelo.Cliente</class>
+    <class>modelo.Compra</class>
+    <class>modelo.Compralivro</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <!--
