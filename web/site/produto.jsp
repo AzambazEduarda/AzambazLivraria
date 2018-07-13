@@ -50,32 +50,16 @@
                                 </div>
                             </div>
                         </div>
+                           <% for (Livro item: lista){
+                           %>
                         <div class="col-md-7">
                             <div class="desc">
-                                <h3>DUMMY PRODUCT NAME</h3>
+                                <h3><%=obj.getNome()%></h3>
                                 <p class="price">
-                                    <span>$68.00</span> 
-                                    <span class="rate text-right">
-                                        <i class="icon-star-full"></i>
-                                        <i class="icon-star-full"></i>
-                                        <i class="icon-star-full"></i>
-                                        <i class="icon-star-full"></i>
-                                        <i class="icon-star-half"></i>
-                                        (74 Rating)
-                                    </span>
+                                    <span><%=obj.getPreco()%></span> 
+                            
                                 </p>
                                 <!-- FAZER O DETALHE DO LIVRO -->
-                                <p>SINOPSEEEEEEEEEE</p>
-                                <div class="color-wrap">
-                                    <p class="color-desc">
-                                        Color: 
-                                        <a href="#" class="color color-1"></a>
-                                        <a href="#" class="color color-2"></a>
-                                        <a href="#" class="color color-3"></a>
-                                        <a href="#" class="color color-4"></a>
-                                        <a href="#" class="color color-5"></a>
-                                    </p>
-                                </div>
                                 <div class="size-wrap">
                                     <p class="size-desc">
                                         Editora:
@@ -105,11 +89,16 @@
                                                 </button>
                                             </span>
                                         </div>
-                                    </div>
+                                    </div>                                        
                                 </div>
-                                <p><a href="cart.html" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
+                                        
+                                <p><a href="carrinho.jsp?id=<%=obj.getId()%>" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
+                            
                             </div>
                         </div>
+                        <% }
+                        %>
+
                     </div>
                 </div>
             </div>
