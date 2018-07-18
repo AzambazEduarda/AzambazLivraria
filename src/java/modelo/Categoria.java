@@ -6,6 +6,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import static modelo.Autor_.livroList;
 
 /**
  *
@@ -38,6 +40,7 @@ public class Categoria implements Serializable {
     @Basic(optional = false)
     @Column(name = "nome")
     private String nome;
+    private List<Livro> livroList;
 
     public Categoria() {
     }
@@ -66,6 +69,14 @@ public class Categoria implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    public List<Livro> getLivroList() {
+        return (List<Livro>) livroList;
+    }
+
+    public void setLivroList(List<Livro> livroList) {
+        this.livroList = livroList;
+    }
+
 
     @Override
     public int hashCode() {

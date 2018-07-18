@@ -1,4 +1,7 @@
 
+<%@page import="dao.EditoraDAO"%>
+<%@page import="dao.CategoriaDAO"%>
+<%@page import="dao.AutorDAO"%>
 <%@page import="modelo.Categoria"%>
 <%@page import="util.StormData"%>
 <%@page import="modelo.Autor"%>
@@ -9,59 +12,40 @@
 <%@page import="dao.LivroDAO"%>
 <%@include file="../cabecalho.jsp" %>
 <%
-String msg ="";
-String classe = "";
-    
+    String msg = "";
+    String classe = "";
     LivroDAO dao = new LivroDAO();
-    Livro obj = new Livro();
+    CategoriaDAO cdao = new CategoriaDAO();
+    AutorDAO adao = new AutorDAO();
+    EditoraDAO edao = new EditoraDAO();
     
-    Categoria c = new Categoria();
-    Editora e = new Editora();
+    
+    Livro obj = new Livro();
+
+    
     //verifica se é postm ou seja, quer alterar
-    if(request.getMethod().equals("POST")){
-        
-            obj.setNome(request.getParameter("txtNome"));
-            obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
-//            obj.setAutorList();
-            obj.setDatapublicacao(StormData.formata(request.getParameter("txtDataPublicacao")));
-            obj.setSinopse(request.getParameter("txtSinopse"));
-            c.setId(Integer.parseInt(request.getParameter("txtCategoria")));
-            e.setCnpj(request.getParameter("txtEditora"));
-            obj.setCategoria(c);
-            obj.setEditora(e);
-            obj.setImagem1(request.getParameter("txtImagem1"));
-            obj.setImagem2(request.getParameter("txtImagem2"));
-            obj.setImagem3(request.getParameter("txtImagem3"));
-          
-        
-        
-        
-        Boolean resultado = dao.alterar(obj);
-        
-        if(resultado){
-            msg = "Registro alterado com sucesso";
-            classe = "alert-success";
-        }
-        else{
-            msg = "Não foi possível alterar";
-            classe = "alert-danger";
-        }
-        
-    }else{
+    if (request.getMethod().equals("POST")) {
+      
+
+    } else {
         //e GET
-        if(request.getParameter("codigo") == null){
+        if (request.getParameter("codigo") == null) {
             response.sendRedirect("index.jsp");
             return;
         }
+
         
-        dao = new LivroDAO();
         obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
-        
-        if(obj == null){
+
+        if (obj == null) {
             response.sendRedirect("index.jsp");
             return;
-        } 
+        }
     }
+
+    List<Autor> autores = adao.listar();
+    List<Editora> editoras = edao.listar();
+    List<Categoria> categorias = cdao.listar();
 %>
 <div class="row">
     <div class="col-lg-12">
@@ -113,27 +97,52 @@ String classe = "";
                     </div>
                      <div class="form-group">
                         <label>Autor</label>
-                        <input class="form-control" type="text" name="txtAutor" required value="<%=obj.getAutorList() %>" />
+                        <input class="form-control" type="text" name="txtAutor" required value="<%=obj.getAutorlist() %>" />
                     </div>
-                       <div class="form-group">
+                    
+                     <div class="form-group">
                         <label>Categoria</label>
-                        <input class="form-control" type="number" name="txtCategoria" required value="<%=obj.getCategoria()%>" />
+                        <select name="selCategoria" class="form-control">
+                            <option>Selecione</option>
+                            
+                        <%
+                         String selecionado;
+                         for(Categoria c:categorias){
+                             
+                            if(obj.getCategoria().getId()==c.getId()){
+                                selecionado="selected";
+                            }
+                            else{
+                                selecionado="";
+                            }
+                        %>
+                        <option value="<%=c.getId()%>" <%=selecionado%>>
+                            
+                            
+                        <%=c.getNome()%>
+                        </option>
+                        <%}%>
+                        </select>
                     </div>
+
                        <div class="form-group">
                         <label>Editora</label>
                         <input class="form-control" type="text" name="txtEditora" required value="<%=obj.getEditora()%>" />
                     </div>
                        <div class="form-group">
                         <label>Imagem1</label>
-                        <input class="form-control" type="text" name="txtFoto" required value="<%=obj.getImagem1()%>" />
+                        <input class="form-control" type="file" name="imagem1" id="arquivo1"  accept="image/*" />
+                        <img src="../arquivos/<%=obj.getImagem1()%>" id="img1"/>
                        </div>         
                        <div class="form-group">
                         <label>Imagem2</label>
-                        <input class="form-control" type="text" name="txtImagem2" required value="<%=obj.getImagem2()%>" />
+                        <input class="form-control" type="file" name="imagem2" id="arquivo1"  accept="image/*" />
+                        <img src="../arquivos/<%=obj.getImagem2()%>" id="img2"/>
                     </div>
                        <div class="form-group">
                         <label>Imagem3</label>
-                        <input class="form-control" type="text" name="txtImagem3" required value="<%=obj.getImagem3()%>" />
+                       <input class="form-control" type="file" name="iamgem3" id="arquivo1"  accept="image/*" />
+                        <img src="../arquivos/<%=obj.getImagem3()%>" id="img3"/>
                     </div>
                      </div>
                        <div class="form-group">

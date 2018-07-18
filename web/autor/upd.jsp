@@ -7,8 +7,9 @@
     String msg = "";
     String classe = "";
 
-    AutorDAO dao = new AutorDAO();
+    AutorDAO adao = new AutorDAO();
     Autor obj = new Autor();
+    String m="",f="";
     //verifica se é postm ou seja, quer alterar
     if (request.getMethod().equals("POST")) {
 
@@ -26,7 +27,7 @@
             obj.setFoto(request.getParameter("txtFotoVelha"));
         }
 
-        Boolean resultado = dao.alterar(obj);
+        Boolean resultado = adao.alterar(obj);
 
         if (resultado) {
             msg = "Registro alterado com sucesso";
@@ -43,8 +44,16 @@
             return;
         }
 
-        dao = new AutorDAO();
-        obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+        adao = new AutorDAO();
+        obj = adao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+        if(obj.getSexo().equals('M'))
+        {
+            m ="selected";
+        }
+        else
+        {
+            f = "selected";
+        }
 
         if (obj == null) {
             response.sendRedirect("index.jsp");
@@ -79,7 +88,7 @@
             <div class="alert <%=classe%>">
                 <%=msg%>
             </div>
-            <form action="#" method="post">
+            <form action="../UploadWS" method="post" enctype="multipart/form-data"m>
 
                 <div class="col-lg-6">
 
@@ -93,12 +102,15 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Sexo</label>
-                        <input class="form-control" type="text"  name="txtSexo"  required value="<%=obj.getSexo()%>" />
+                        <label> Sexo </label>
+                        <select name="txtSexo">
+                            <option value='M' <%=m%>> Masculino </option>
+                            <option value='F'<%=f%>> Feminino </option>
+                    </select>
                     </div>
                     <div class="form-group">
                         <label>Foto</label>
-                        <input class="form-control" type="text" name="txtFoto" id="foto"
+                       <input class="form-control" type="file" name="txtFoto" id="foto"  accept="image/*"  value="<%=obj.getFoto()%>"/>
                         <img src="../arquivos/<%=obj.getFoto()%>" id="foto"/>
                         <input type="hidden" name="txtFotoVelha"
                                value="<%=obj.getFoto()%>"/>

@@ -2,9 +2,7 @@
 <%@page import="dao.LivroDAO"%>
 <%@page import="modelo.Livro"%>
 <%@include file="cabecalho.jsp" %>
-<%   
-    if (request.getParameter("id") == null) 
-    {
+<%    if (request.getParameter("id") == null) {
         response.sendRedirect("index.jsp");
         return;
     }
@@ -50,14 +48,13 @@
                                 </div>
                             </div>
                         </div>
-                           <% for (Livro item: lista){
-                           %>
+                      
                         <div class="col-md-7">
                             <div class="desc">
                                 <h3><%=obj.getNome()%></h3>
                                 <p class="price">
-                                    <span><%=obj.getPreco()%></span> 
-                            
+                                    <span>R$ <%=obj.getPreco()%></span> 
+
                                 </p>
                                 <!-- FAZER O DETALHE DO LIVRO -->
                                 <div class="size-wrap">
@@ -71,8 +68,20 @@
                                     <p class="size-desc">
                                         Categoria:
                                         <span><%=obj.getCategoria()%></span>
-
                                     </p>
+                                </div>
+                                <div class="size-wrap">
+                                    <p class="size-desc">
+                                        Autores: 
+                                        <span>
+                                            <%for (Autor a : obj.getAutorlist()) {
+
+                                            %>
+                                            <a href="detalheautor?id=<%=a.getId()%>">
+                                                <%=a.getNome()%></a> - 
+                                                <%}
+
+                                                %></span>										</p>
                                 </div>
                                 <div class="row row-pb-sm">
                                     <div class="col-md-4">
@@ -91,13 +100,12 @@
                                         </div>
                                     </div>                                        
                                 </div>
-                                        
+
                                 <p><a href="carrinho.jsp?id=<%=obj.getId()%>" class="btn btn-primary btn-addtocart"><i class="icon-shopping-cart"></i> Add to Cart</a></p>
-                            
+
                             </div>
                         </div>
-                        <% }
-                        %>
+                      
 
                     </div>
                 </div>

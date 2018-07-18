@@ -10,9 +10,14 @@
     Editora obj = new Editora();
     EditoraDAO dao = new EditoraDAO();
 
-    if (request.getParameter("txtNome") != null) {
+    if (request.getParameter("txtNome") != null && request.getParameter("txtCnpj") != null) {
         obj.setNome(request.getParameter("txtNome"));
-
+        obj.setCnpj(request.getParameter("txtCnpj"));   
+        
+        if(request.getParameter("txtLogo") != null){
+            obj.setLogo(request.getParameter("txtLogo"));
+        }
+     
         Boolean resultado = dao.incluir(obj);
         dao.fecharConexao();
         if (resultado) {

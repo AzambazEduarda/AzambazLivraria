@@ -28,7 +28,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "compra")
 @NamedQueries({
-    @NamedQuery(name = "Compra.findAll", query = "SELECT c FROM Compra c")})
+    @NamedQuery(name = "Compra.findAll", query = "SELECT c FROM Compra c"),
+     @NamedQuery(name = "Compra.findFilter",
+            query = "SELECT c FROM Compra c WHERE UPPER (c.nome) like :filtro"),
+    })
 public class Compra implements Serializable {
 
     private static final long serialVersionUID = 1L;

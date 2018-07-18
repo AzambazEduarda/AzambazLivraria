@@ -17,61 +17,68 @@
 <%
     String msg = "";
     String classe = "";
-    
-    Livro obj = new Livro();
-    LivroDAO dao = new LivroDAO();
-    
-    CategoriaDAO cdao = new CategoriaDAO();
-    List <Categoria> clistar = cdao.listar();
-    Categoria c = new Categoria();
-    
-    EditoraDAO edao= new EditoraDAO();
-    List<Editora> elistar = edao.listar();
-    Editora e = new Editora();
-    
     AutorDAO adao = new AutorDAO();
-    List<Autor> alistar = adao.listar();
-    
-    if(request.getMethod().equals("POST")){
-        String[] autoresid = request.getParameter("autores").split(";");
-        
-        if(request.getParameter("txtNome") !=null && request.getParameter("txtPreco") != null && request.getParameter("txtDataPublicacao")
-                != null && request.getParameter("txtSinopse") != null && request.getParameter("txtCategoria") != null &&
-                request.getParameter("txtEditora")!= null);
-        {
-            obj.setNome(request.getParameter("txtNome"));
-            obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
-            obj.setDatapublicacao(StormData.formata(request.getParameter("txtDataPublicacao")));
-            obj.setSinopse(request.getParameter("txtSinopse"));
-            c.setId(Integer.parseInt(request.getParameter("txtCategoria")));
-            e.setCnpj(request.getParameter("txtEditora"));
-            obj.setCategoria(c);
-            obj.setEditora(e);
-            obj.setImagem1(request.getParameter("txtImagem1"));
-            obj.setImagem2(request.getParameter("txtImagem2"));
-            obj.setImagem3(request.getParameter("txtImagem3"));
-            
+    EditoraDAO edao = new EditoraDAO();
+    CategoriaDAO cdao = new CategoriaDAO();
+    if (request.getMethod().equals("POST")) {
+        if (request.getParameter("txtNome") != null) {
+            //pego uma lista de autores(com mesmo name)
+            String[] autoresid = request.getParameter("autores").split(";");
+
+            //popular o livro
+            Livro l = new Livro();
+            l.setNome(request.getParameter("txtNome"));
+            l.setPreco(Float.parseFloat(request.getParameter("txtPreco")));
+            l.setDatapublicacao(StormData.formata(request.getParameter("txtDataPublicacao")));
+            l.setSinopse(request.getParameter("txtSinopse"));
+            if (request.getParameter("txtImg1") != null)
+            {
+                l.setImagem1(request.getParameter("txtImg1"));
+            }
+            if (request.getParameter("txtImg2") != null) 
+            {
+                l.setImagem2(request.getParameter("txtImg2"));
+            }
+            if (request.getParameter("txtImg3") != null) 
+            {
+                l.setImagem3(request.getParameter("txtImg3"));
+            }
+
+            //Autores
             List<Autor> listaautores = new ArrayList<>();
-            for (String id : autoresid){
-                 Integer idinteger = Integer.parseInt(id);
-                 listaautores.add(adao.buscarPorChavePrimaria(idinteger));
+            for (String id : autoresid) {
+                Integer idinteger = Integer.parseInt(id);
+                listaautores.add(adao.buscarPorChavePrimaria(idinteger));
             }
-            obj.setAutorList(listaautores);
-            Boolean resultado = dao.incluir(obj);
-            if(resultado){
-                msg = "Registro cadastrado com sucess";
+            l.setAutorlist(listaautores);
+
+            Categoria c = new Categoria();
+            c.setId(Integer.parseInt(request.getParameter("categorias")));
+            l.setCategoria(c);
+
+            Editora e = new Editora();
+            e.setCnpj(request.getParameter("editoras"));
+            l.setEditora(e);
+
+            LivroDAO dao = new LivroDAO();
+            dao.incluir(l);
+
+            Boolean resultado = dao.incluir(l);
+            if (resultado) {
+                msg = "Registro cadastrado com sucesso";
                 classe = "alert-success";
-            }
-            else{
-                msg = "Não foi possivel cadastrar";
+            } else {
+                msg = "Não foi possível cadastrar";
                 classe = "alert-danger";
             }
-            
         }
-    }
-    dao.fecharConexao();
-    
 
+    }
+
+    //pego meus autores
+    List<Autor> autores = adao.listar();
+    List<Editora> editoras = edao.listar();
+    List<Categoria> categorias = cdao.listar();
 %>
 <div class="row">
     <div class="col-lg-12">
@@ -104,8 +111,8 @@
 
                 <div class="form-group">
                     <label>Autores</label>
-                    <%for (Autor item:alistar ) {%>
-                    <input type="checkbox" name="autoreschk" value="<%=item.getId()%>"><%=item.getNome()%>
+                    <%for (Autor a: autores ) {%>
+                    <input type="checkbox" name="autoreschk" value="<%=a.getId()%>"><%=a.getNome()%>
 
                     <%}%>
                     </select>
@@ -126,10 +133,10 @@
                     <select name="txtCategoria" required />
                     
                     <label>Categoria</label>
-                    <%for (Categoria item:clistar) {%>
+                    <%for (Categoria c: categorias) {%>
                   
-                    <option value="<%=item.getId()%>">
-                        <%=item.getNome()%>
+                    <option value="<%=c.getId()%>">
+                        <%=c.getNome()%>
                     </option>
 
                     <%}%>   
@@ -138,10 +145,10 @@
                 <div class="form-group">
                     <select name="txtEditora" required />
                     <label>Editora</label>
-                    <%for (Editora item:elistar) {%>
+                    <%for (Editora e: editoras) {%>
                    
-                    <option value="<%=item.getCnpj()%>">
-                        <%=item.getNome()%>
+                    <option value="<%=e.getCnpj()%>">
+                        <%=e.getNome()%>
                     </option>
                     
 

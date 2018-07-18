@@ -6,23 +6,23 @@
 
 <%
 
-    AutorDAO dao = new AutorDAO();
+    AutorDAO ldao = new AutorDAO();
     List<Autor> lista;
 
     if (request.getParameter("txtFiltro") != null) {
-        lista = dao.listar(request.getParameter("txtFiltro"));
+        lista = ldao.listar(request.getParameter("txtFiltro"));
 
     } else {
 
         //verifico se é excluir
         if (request.getParameter("codigo") != null) {
-            Autor obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+            Autor obj = ldao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
             if (obj != null) {
-                dao.excluir(obj);
+                ldao.excluir(obj);
             }
         }
 
-        lista = dao.listar();
+        lista = ldao.listar();
     }
 
     
@@ -32,7 +32,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Gerenciamento de Autors
+            Gerenciamento de Autores
 
         </h1>
         <ol class="breadcrumb">
@@ -88,7 +88,7 @@
                             <td><%=item.getNome()%></td>
                             <td><%=item.getNacionalidade()%></td>
                             <td><%=item.getSexo()%></td>
-                            <td><%=item.getFoto()%></td>
+                            <td><img src="../arquivos/<%=item.getFoto()%>" width="70px" height="60px"/></td>
                             <td><a href="upd.jsp?codigo=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
                                 <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="codigo =<%=item.getId()%>">Excluir</button>  
                             </td>

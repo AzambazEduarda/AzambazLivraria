@@ -9,12 +9,15 @@ String classe = "";
     EditoraDAO dao = new EditoraDAO();
     Editora obj = new Editora();
     //verifica se é postm ou seja, quer alterar
-    if(request.getMethod().equals("POST")){
-        
-        //popular com oq ele digitou no form
-        obj.setCnpj(request.getParameter("Cnpj"));
+    if(request.getMethod().equals("POST")){ 
+        //popular com oq ele digitou no form    
         obj.setNome(request.getParameter("txtNome"));
-        obj.setLogo(request.getParameter("txtLogo"));
+        obj.setCnpj(request.getParameter("txtCnpj"));
+        
+        if(request.getParameter("txtLogo") != null){
+            obj.setLogo(request.getParameter("txtLogo"));
+        }
+        
         Boolean resultado = dao.alterar(obj);
         
         if(resultado){
@@ -34,7 +37,7 @@ String classe = "";
         }
         
         dao = new EditoraDAO();
-        obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+        obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("txtCnpj")));
         
         if(obj == null){
             response.sendRedirect("index.jsp");

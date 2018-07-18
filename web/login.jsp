@@ -38,7 +38,7 @@ if(request.getMethod().equals("POST")){
             <label>Senha:</label>
             <input type="password" name="txtSenha"/>
             <br/>
-            <button type="submit">OK<button>
+            <button type="submit">OK
         </form>
     </body>
 </html>
