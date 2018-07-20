@@ -27,7 +27,7 @@ import static modelo.Autor_.livroList;
 @NamedQueries({
     @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c"),
     @NamedQuery(name = "Categoria.findFilter",
-            query = "SELECT c FROM Categoria c WHERE UPPER (c.nome) like :filtro"),
+            query = "SELECT c FROM Categoria c WHERE  c.nome like :filtro"),
     })
 public class Categoria implements Serializable {
 

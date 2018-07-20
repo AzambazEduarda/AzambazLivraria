@@ -8,7 +8,6 @@ package modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,10 +27,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "compra")
 @NamedQueries({
-    @NamedQuery(name = "Compra.findAll", query = "SELECT c FROM Compra c"),
-     @NamedQuery(name = "Compra.findFilter",
-            query = "SELECT c FROM Compra c WHERE UPPER (c.nome) like :filtro"),
-    })
+    @NamedQuery(name = "Compra.findAll", query = "SELECT c FROM Compra c")})
 public class Compra implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,16 +36,15 @@ public class Compra implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "endere\u00c7o")
-    private String endereÇo;
-    @Basic(optional = false)
+    @Column(name = "endereco")
+    private String endereco;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valor")
-    private float valor;
+    private Float valor;
     @JoinColumn(name = "cliente", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Cliente cliente;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compra")
+    @OneToMany(mappedBy = "compra")
     private List<Compralivro> compralivroList;
 
     public Compra() {
@@ -57,12 +52,6 @@ public class Compra implements Serializable {
 
     public Compra(Integer id) {
         this.id = id;
-    }
-
-    public Compra(Integer id, String endereÇo, float valor) {
-        this.id = id;
-        this.endereÇo = endereÇo;
-        this.valor = valor;
     }
 
     public Integer getId() {
@@ -73,19 +62,19 @@ public class Compra implements Serializable {
         this.id = id;
     }
 
-    public String getEndereÇo() {
-        return endereÇo;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setEndereÇo(String endereÇo) {
-        this.endereÇo = endereÇo;
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
-    public float getValor() {
+    public Float getValor() {
         return valor;
     }
 
-    public void setValor(float valor) {
+    public void setValor(Float valor) {
         this.valor = valor;
     }
 

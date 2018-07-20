@@ -74,7 +74,7 @@
                                     <p class="size-desc">
                                         Autores: 
                                         <span>
-                                            <%for (Autor a : obj.getAutorlist()) {
+                                            <%for (Autor a : obj.getAutorList()) {
 
                                             %>
                                             <a href="detalheautor?id=<%=a.getId()%>">

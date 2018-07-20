@@ -4,35 +4,31 @@
 <%@page import="dao.CategoriaDAO"%>
 <%@include file="../cabecalho.jsp" %>
 
-<% 
-    
-    CategoriaDAO dao = new CategoriaDAO();
-    List<Categoria> lista;
+<%   
+    CategoriaDAO cdao = new CategoriaDAO();
+    List<Categoria> clista;
     
     if (request.getParameter("txtFiltro") != null ) {
-        lista = dao.listar(request.getParameter("txtFiltro"));
+        clista = cdao.listar(request.getParameter("txtFiltro"));
         
     } else{ 
    
     //verifico se é excluir
         if(request.getParameter("codigo") != null){
-            Categoria obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+            Categoria obj = cdao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
             if(obj != null){
-                dao.excluir(obj);
+                cdao.excluir(obj);
             }
         }
         
-        lista = dao.listar();
+        clista = cdao.listar();
     }
-    
-    
-
 %>
 
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">
-            Gerenciamento de Categorias
+            Categorias
 
         </h1>
         <ol class="breadcrumb">
@@ -61,7 +57,7 @@
     <div class="panel panel-default">
         <form action="#" method="post">
             <div class="form-group input-group">
-                <input type="text" class="form-control" name="txtFiltro" placeholder="digita aqui oh abestado...">
+                <input type="text" class="form-control" name="txtFiltro" placeholder="digita aqui oh...">
                                 <span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button></span>
                             </div>
         </form>
@@ -78,15 +74,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%for(Categoria item: lista)
+                    <%for(Categoria c: clista)
                     {
                     %>
                     <tr>
-                        <td><%=item.getId()%></td>
-                        <td><%=item.getNome() %></td>
-                        <td><a href="upd.jsp?codigo=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
+                        <td><%=c.getId()%></td>
+                        <td><%=c.getNome() %></td>
+                        <td><a href="upd.jsp?codigo=<%=c.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
                             <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" 
-                                    onclick="codigo=<%=item.getId()%>">Excluir</button>  
+                                    onclick="codigo=<%=c.getId()%>">Excluir</button>  
                         </td>
                     </tr>
                     <% } %>

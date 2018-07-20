@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,11 +34,13 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Livro.findAll", query = "SELECT l FROM Livro l"),
     @NamedQuery(name = "Livro.findFilter",
-            query = "SELECT l FROM Livro l WHERE UPPER (l.nome) like :filtro"),
+            query = "SELECT l FROM Livro l WHERE  l.nome like :filtro"),
     })
     
 
 public class Livro implements Serializable {
+    @OneToMany
+    private List<Compralivro> compralivroList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -68,17 +69,18 @@ public class Livro implements Serializable {
      @JoinTable(name = "autor_livro", joinColumns = {
         @JoinColumn(name = "livro", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "autor", referencedColumnName = "id")})
+     
     @ManyToMany
-    private List<Autor> autorlist;
+    private List<Autor> autorList;
     @JoinColumn (name ="categoria", referencedColumnName = "id")
-    @ManyToOne (optional = false)
-    private String categoria;
+    
+    @ManyToOne
+    private Categoria categoria;
     
     @JoinColumn(name = "editora", referencedColumnName = "cnpj")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Editora editora;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "livro")
-    private List<Compralivro> compralivroList;
+  
 
     public Livro() {
     }
@@ -158,19 +160,19 @@ public class Livro implements Serializable {
         this.sinopse = sinopse;
     }
 
-    public List<Autor> getAutorlist() {
-        return autorlist;
+    public List<Autor> getAutorList() {
+        return autorList;
     }
 
-    public void setAutorlist(List<Autor> autorlist) {
-        this.autorlist = autorlist;
+    public void setAutorList(List<Autor> autorList) {
+        this.autorList = autorList;
     }
 
-    public String getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 

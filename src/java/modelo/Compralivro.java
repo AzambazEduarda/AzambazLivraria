@@ -34,17 +34,16 @@ public class Compralivro implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @Column(name = "quantidade")
-    private int quantidade;
-    @Basic(optional = false)
+    @Column(name = "qtdade")
+    private Integer qtdade;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valorunitario")
-    private float valorunitario;
+    private Float valorunitario;
     @JoinColumn(name = "compra", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Compra compra;
     @JoinColumn(name = "livro", referencedColumnName = "id")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Livro livro;
 
     public Compralivro() {
@@ -52,12 +51,6 @@ public class Compralivro implements Serializable {
 
     public Compralivro(Integer id) {
         this.id = id;
-    }
-
-    public Compralivro(Integer id, int quantidade, float valorunitario) {
-        this.id = id;
-        this.quantidade = quantidade;
-        this.valorunitario = valorunitario;
     }
 
     public Integer getId() {
@@ -68,19 +61,19 @@ public class Compralivro implements Serializable {
         this.id = id;
     }
 
-    public int getQuantidade() {
-        return quantidade;
+    public Integer getQtdade() {
+        return qtdade;
     }
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
+    public void setQtdade(Integer qtdade) {
+        this.qtdade = qtdade;
     }
 
-    public float getValorunitario() {
+    public Float getValorunitario() {
         return valorunitario;
     }
 
-    public void setValorunitario(float valorunitario) {
+    public void setValorunitario(Float valorunitario) {
         this.valorunitario = valorunitario;
     }
 

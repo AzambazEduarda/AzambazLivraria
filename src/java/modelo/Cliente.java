@@ -8,7 +8,6 @@ package modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,9 +26,9 @@ import javax.persistence.Table;
 @Table(name = "cliente")
 @NamedQueries({
     @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c"),
-     @NamedQuery(name = "Cliente.findFilter",
-            query = "SELECT c FROM Cliente c WHERE UPPER (c.nome) like :filtro"),
-    })
+    @NamedQuery(name = "Cliente.login", query = "SELECT c FROM Cliente c WHERE "
+        + " c.email = :email and c.senha=:senha")})
+
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,15 +41,14 @@ public class Cliente implements Serializable {
     @Column(name = "nome")
     private String nome;
     @Basic(optional = false)
-    @Column(name = "endere\u00c7o")
-    private String endereÇo;
-    @Basic(optional = false)
     @Column(name = "email")
     private String email;
     @Basic(optional = false)
     @Column(name = "senha")
     private String senha;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    @Column(name = "endereco")
+    private String endereco;
+    @OneToMany(mappedBy = "cliente")
     private List<Compra> compraList;
 
     public Cliente() {
@@ -60,10 +58,9 @@ public class Cliente implements Serializable {
         this.id = id;
     }
 
-    public Cliente(Integer id, String nome, String endereÇo, String email, String senha) {
+    public Cliente(Integer id, String nome, String email, String senha) {
         this.id = id;
         this.nome = nome;
-        this.endereÇo = endereÇo;
         this.email = email;
         this.senha = senha;
     }
@@ -84,14 +81,6 @@ public class Cliente implements Serializable {
         this.nome = nome;
     }
 
-    public String getEndereÇo() {
-        return endereÇo;
-    }
-
-    public void setEndereÇo(String endereÇo) {
-        this.endereÇo = endereÇo;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -106,6 +95,14 @@ public class Cliente implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
     }
 
     public List<Compra> getCompraList() {

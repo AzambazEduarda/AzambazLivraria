@@ -45,7 +45,7 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i>  <a href="index.jsp">Área Administrativa</a>
+                <i class="fa fa-dashboard"></i>  <a href="index.jsp">Listagem de Autores</a>
             </li>
             <li class="active">
                 <i class="fa fa-file"></i> Aqui vai o conteúdo de apresentação 

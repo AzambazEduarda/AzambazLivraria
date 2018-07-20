@@ -6,7 +6,6 @@
 <%@include file="../cabecalho.jsp" %>
 
 <% 
-    
     LivroDAO dao = new LivroDAO();
     List<Livro> lista;
     
@@ -21,11 +20,9 @@
             if(obj != null){
                 dao.excluir(obj);
             }
-        }
-        
+        }   
         lista = dao.listar();
     }
-
 %>
 
 <div class="row">
@@ -93,7 +90,7 @@
                         <td><%=item.getId() %></td>
                         <td><%=item.getNome() %></td>
                         <td><%=item.getPreco()%></td>
-                        <td><%=item.getAutorlist()%></td>
+                        <td><%=item.getAutorList()%></td>
                         <td><%=StormData.formata(item.getDatapublicacao())%></td>
                         <td><%=item.getCategoria()%></td>
                         <td><%=item.getEditora()%></td>

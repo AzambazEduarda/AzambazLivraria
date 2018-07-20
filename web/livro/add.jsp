@@ -50,7 +50,7 @@
                 Integer idinteger = Integer.parseInt(id);
                 listaautores.add(adao.buscarPorChavePrimaria(idinteger));
             }
-            l.setAutorlist(listaautores);
+            l.setAutorList(listaautores);
 
             Categoria c = new Categoria();
             c.setId(Integer.parseInt(request.getParameter("categorias")));
@@ -60,10 +60,10 @@
             e.setCnpj(request.getParameter("editoras"));
             l.setEditora(e);
 
-            LivroDAO dao = new LivroDAO();
-            dao.incluir(l);
+            LivroDAO ldao = new LivroDAO();
+            ldao.incluir(l);
 
-            Boolean resultado = dao.incluir(l);
+            Boolean resultado = ldao.incluir(l);
             if (resultado) {
                 msg = "Registro cadastrado com sucesso";
                 classe = "alert-success";
@@ -74,7 +74,6 @@
         }
 
     }
-
     //pego meus autores
     List<Autor> autores = adao.listar();
     List<Editora> editoras = edao.listar();

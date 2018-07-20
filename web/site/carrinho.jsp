@@ -89,19 +89,21 @@ session.setAttribute("carrinho", carrinho);
                         <span>Remove</span>
                     </div>
                 </div>
-                <% for (Compralivro obj: carrinho){
+                <% for (Compralivro obj: carrinho)
+                {
+                    
                 %>
                 <div class="product-cart">
                     <div class="one-forth">
                         <div class="product-img" style="background-image: url(images/item-6.jpg);">
                         </div>
                         <div class="display-tc">
-                            <h3><%=obj.getLivro().getNome()%></h3>
+                            <h3><%=cl.getLivro().getNome()%></h3>
                         </div>
                     </div>
                     <div class="one-eight text-center">
                         <div class="display-tc">
-                            <span class="price"><%=obj.getLivro().getPreco()%></span>
+                            <span class="price"><%=cl.getLivro().getPreco()%></span>
                         </div>
                     </div>
                     <div class="one-eight text-center">
@@ -111,7 +113,7 @@ session.setAttribute("carrinho", carrinho);
                     </div>
                     <div class="one-eight text-center">
                         <div class="display-tc">
-                            <span class="price"><%=obj.getLivro().getPreco()%></span>
+                            <span class="price"><%=cl.getLivro().getPreco()%></span>
                         </div>
                     </div>
                     <div class="one-eight text-center">
@@ -128,13 +130,10 @@ session.setAttribute("carrinho", carrinho);
                 <div class="total-wrap">
                     <div class="row">
                         <div class="col-md-8">
-                            <form action="#">
-                                <div class="row form-group">
-                                    <div class="col-md-9">
-                                        <input type="text" name="quantity" class="form-control input-number" placeholder="Your Coupon Number...">
-                                    </div>
+                            <form action="checkout.jsp">
+                                <div class="row form-group">                                  
                                     <div class="col-md-3">
-                                        <input type="submit" value="Comprar" class="btn btn-primary">
+                                        <input type="submit" value="Concluir compra" class="btn btn-primary">
                                     </div>
                                 </div>
                             </form>
@@ -142,8 +141,7 @@ session.setAttribute("carrinho", carrinho);
                         <div class="col-md-3 col-md-push-1 text-center">
                             <div class="total">
                                 <div class="sub">
-                                    <p><span>Subtotal:</span> <span>$200.00</span></p>
-                                    <p><span>Delivery:</span> <span>$0.00</span></p>
+                                    <p><span>Subtotal:</span> <span>$200.00</span></p>                               
                                     <p><span>Discount:</span> <span>$45.00</span></p>
                                 </div>
                                 <div class="grand-total">

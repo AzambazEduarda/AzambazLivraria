@@ -8,7 +8,7 @@
     String msg = "";
     String classe = "";
     Editora obj = new Editora();
-    EditoraDAO dao = new EditoraDAO();
+    EditoraDAO edao = new EditoraDAO();
 
     if (request.getParameter("txtNome") != null && request.getParameter("txtCnpj") != null) {
         obj.setNome(request.getParameter("txtNome"));
@@ -18,8 +18,8 @@
             obj.setLogo(request.getParameter("txtLogo"));
         }
      
-        Boolean resultado = dao.incluir(obj);
-        dao.fecharConexao();
+        Boolean resultado = edao.incluir(obj);
+        edao.fecharConexao();
         if (resultado) {
             msg = "Registro cadastrado com sucesso";
             classe = "alert-success";

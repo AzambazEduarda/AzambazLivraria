@@ -8,13 +8,13 @@
     String msg = "";
     String classe = "";
     Categoria obj = new Categoria();
-    CategoriaDAO dao = new CategoriaDAO();
+    CategoriaDAO cdao = new CategoriaDAO();
 
     if (request.getParameter("txtNome") != null) {
         obj.setNome(request.getParameter("txtNome"));
 
-        Boolean resultado = dao.incluir(obj);
-        dao.fecharConexao();
+        Boolean resultado = cdao.incluir(obj);
+        cdao.fecharConexao();
         if (resultado) {
             msg = "Registro cadastrado com sucesso";
             classe = "alert-success";
@@ -34,7 +34,7 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i>  <a href="index.jsp">Área Administrativa</a>
+                <i class="fa fa-dashboard"></i>  <a href="index.jsp">Lisatagem de Categorias</a>
             </li>
             <li class="active">
                 <i class="fa fa-file"></i> Aqui vai o conteúdo de apresentação 

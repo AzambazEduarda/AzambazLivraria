@@ -5,14 +5,17 @@
  */
 package dao;
 
-import modelo.Editora;
+
+import modelo.Compralivro;
 
 /**
  *
  * @author aluno
  */
-public class EditoraDAO extends GenericDAO<Editora, Integer> {
-    public EditoraDAO(){
-        super(Editora.class);
+public class CompralivroDAO extends GenericDAO<Compralivro, Integer>{
+    public CompralivroDAO(){
+        super(Compralivro.class);
     }
+    
+    
 }

@@ -1,15 +1,15 @@
-
-<%@page import="dao.EditoraDAO"%>
-<%@page import="dao.CategoriaDAO"%>
-<%@page import="dao.AutorDAO"%>
-<%@page import="modelo.Categoria"%>
 <%@page import="util.StormData"%>
-<%@page import="modelo.Autor"%>
-<%@page import="modelo.Editora"%>
-<%@page import="java.util.List"%>
-<%@page import="java.math.BigDecimal"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Livro"%>
 <%@page import="dao.LivroDAO"%>
+<%@page import="dao.EditoraDAO"%>
+<%@page import="dao.AutorDAO"%>
+<%@page import="modelo.Editora"%>
+<%@page import="java.util.List"%>
+<%@page import="modelo.Autor"%>
+<%@page import="java.math.BigDecimal"%>
+<%@page import="modelo.Categoria"%>
+<%@page import="dao.CategoriaDAO"%>
 <%@include file="../cabecalho.jsp" %>
 <%
     String msg = "";
@@ -25,7 +25,74 @@
     
     //verifica se é postm ou seja, quer alterar
     if (request.getMethod().equals("POST")) {
-      
+       //pego uma lista de autores(com mesmo name)
+        String[] autoresid = request.getParameter("autoreschk").split(";");
+        //popular o livro
+        if (request.getParameter("txtNome") != null && request.getParameter("txtPreco") != null && 
+                request.getParameter("txtData") != null && request.getParameter("txtCategoria") != null &&
+                request.getParameter("txtEditora") != null) 
+        {
+            
+             List<Categoria> clistar = cdao.listar();
+             Categoria c = new Categoria();
+     
+             List<Editora> elistar = edao.listar();
+              Editora e = new Editora();
+              
+            List<Autor> alistar = adao.listar();
+     
+            obj.setId(Integer.parseInt(request.getParameter("txtId")));
+            obj.setNome(request.getParameter("txtNome"));
+            obj.setPreco(Float.parseFloat(request.getParameter("txtPreco")));    
+            obj.setDatapublicacao(StormData.formata(request.getParameter("txtData")));
+            obj.setSinopse(request.getParameter("txtSinopse"));
+            c.setId(Integer.parseInt(request.getParameter("txtCategoria")));
+            e.setCnpj(request.getParameter("txtEditora"));
+            obj.setCategoria(c);
+            obj.setEditora(e);
+            obj.setImagem1(request.getParameter("txtFoto"));
+            obj.setImagem2(request.getParameter("txtFoto2"));
+            obj.setImagem3(request.getParameter("txtFoto3"));
+            
+                    if(request.getParameter("txtFoto")!=null){
+
+                obj.setImagem1(request.getParameter("txtFoto"));
+                     }
+                else{
+                 obj.setImagem1(request.getParameter("txtFotoVelha"));
+            }
+
+                        if(request.getParameter("txtFoto2")!=null){
+
+                obj.setImagem2(request.getParameter("txtFoto2"));
+            }
+            else{
+                 obj.setImagem2(request.getParameter("txtFotoVelha2"));
+            }
+
+                            if(request.getParameter("txtFoto3")!=null){
+
+                obj.setImagem3(request.getParameter("txtFoto3"));
+            }
+            else{
+                 obj.setImagem3(request.getParameter("txtFotoVelha3"));
+            }
+            
+            List<Autor> listaautores = new ArrayList<>();
+            for (String id : autoresid) {
+                Integer idinteger = Integer.parseInt(id);
+                listaautores.add(adao.buscarPorChavePrimaria(idinteger));
+            }
+            obj.setAutorList(listaautores);
+            Boolean resultado = dao.alterar(obj);
+            if (resultado) {
+                msg = "Registro cadastrado com sucesso";
+                classe = "alert-success";
+            } else {
+                msg = "Não foi possível cadastrar";
+                classe = "alert-danger";
+            }
+        }
 
     } else {
         //e GET
@@ -74,91 +141,156 @@
             <div class="alert <%=classe%>">
                 <%=msg%>
             </div>
-            <form action="#" method="post">
-                
+            <form action="../UploadWS" method="post" enctype="multipart/form-data">
+
                 <div class="col-lg-6">
 
                     <div class="form-group">
-                        <label>Id</label>
-                        <input class="form-control" type="text" name="txtCodigo" readonly value="<%=obj.getId()%>"/>
+                        <label>Código</label>
+                        <input class="form-control" type="text" name="txtId" readonly value="<%=obj.getId()%>"/>
                     </div>
-                    
+
                     <div class="form-group">
                         <label>Nome</label>
-                        <input class="form-control" type="text" name="txtNome" required value="<%=obj.getNome() %>" />
+                        <input class="form-control" type="text"  name="txtNome"  required value="<%=obj.getNome()%>"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Preço</label>
+                        <input class="form-control" type="text"  name="txtPreco"  required value="<%=obj.getPreco()%>" />
                     </div>
                     <div class="form-group">
-                        <label>Preco</label>
-                        <input class="form-control" type="number" name="txtPreco" required value="<%=obj.getPreco()%>" />
+                        <label>Sinopse</label>
+                        
+                        <TextArea class="form-control" name="txtSinopse" required ><%=obj.getSinopse()%></TextArea>
+                        </textarea>
                     </div>
+
                     <div class="form-group">
-                        <label>Data da Publicacao</label>
-                        <input class="form-control" type="date" name="txtDataDaPublicacao" required value="<%=obj.getDatapublicacao()%>" />
+                        <label>Data Publicação</label>
+                        <input class="form-control" type="text"  name="txtData"  required value="<%=StormData.formata(obj.getDatapublicacao())%>" />
                     </div>
-                     <div class="form-group">
-                        <label>Autor</label>
-                        <input class="form-control" type="text" name="txtAutor" required value="<%=obj.getAutorlist() %>" />
-                    </div>
-                    
-                     <div class="form-group">
+
+                    <div class="form-group">
                         <label>Categoria</label>
-                        <select name="selCategoria" class="form-control">
+                        <select name="txtCategoria" class="form-control">
                             <option>Selecione</option>
-                            
                         <%
                          String selecionado;
-                         for(Categoria c:categorias){
+                         for(Categoria c1:categorias){
                              
-                            if(obj.getCategoria().getId()==c.getId()){
+                            if(obj.getCategoria().getId()==c1.getId()){
                                 selecionado="selected";
                             }
                             else{
                                 selecionado="";
                             }
                         %>
-                        <option value="<%=c.getId()%>" <%=selecionado%>>
+                        <option value="<%=c1.getId()%>" <%=selecionado%>>
                             
                             
-                        <%=c.getNome()%>
+                        <%=c1.getNome()%>
                         </option>
                         <%}%>
                         </select>
                     </div>
 
-                       <div class="form-group">
+                    <div class="form-group">
                         <label>Editora</label>
-                        <input class="form-control" type="text" name="txtEditora" required value="<%=obj.getEditora()%>" />
-                    </div>
-                       <div class="form-group">
-                        <label>Imagem1</label>
-                        <input class="form-control" type="file" name="imagem1" id="arquivo1"  accept="image/*" />
-                        <img src="../arquivos/<%=obj.getImagem1()%>" id="img1"/>
-                       </div>         
-                       <div class="form-group">
-                        <label>Imagem2</label>
-                        <input class="form-control" type="file" name="imagem2" id="arquivo1"  accept="image/*" />
-                        <img src="../arquivos/<%=obj.getImagem2()%>" id="img2"/>
-                    </div>
-                       <div class="form-group">
-                        <label>Imagem3</label>
-                       <input class="form-control" type="file" name="iamgem3" id="arquivo1"  accept="image/*" />
-                        <img src="../arquivos/<%=obj.getImagem3()%>" id="img3"/>
-                    </div>
-                     </div>
-                       <div class="form-group">
-                        <label>Sinopse</label>
-                        <input class="form-control" type="text" name="txtSinopse" required value="<%=obj.getSinopse()%>" />
+                        <select name="txtEditora" class="form-control">
+                            <option>Selecione</option>
+                        <%
+                       
+                         for(Editora e1:editoras){
+                             
+                            if(obj.getEditora().getCnpj()==e1.getCnpj()){
+                                selecionado="selected";
+                            }
+                            else{
+                                selecionado="";
+                            }
+                        %>
+                        <option value="<%=e1.getCnpj()%>" <%=selecionado%>>
+                            
+                            
+                        <%=e1.getNome()%>
+                        </option>
+                        <%}%>
+                        </select>
                     </div>
 
+                   <div class="form-group">
+                        <label>Image1</label>
+                        <input class="form-control" type="file" name="txtFoto" id="arquivo1"  accept="image/*" />
+                         <input type="hidden" name="txtFotoVelha"
+                               value="<%=obj.getImagem1()%>" />
+                        <td><img src="../arquivos/<%=obj.getImagem1()%>" id="img1" width="100" height="80"/></td>
+                        
+                    </div>
 
-                <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
+                    <div class="form-group">
+                        <label>Imagem 2</label>
+                        <input class="form-control" type="file" name="txtFoto2" id="arquivo2"  accept="image/*" />
+                         <input type="hidden" name="txtFotoVelha2"
+                               value="<%=obj.getImagem2()%>" />
+                        <td><img src="../arquivos/<%=obj.getImagem2()%>" id="img2" width="100" height="80"/></td>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Imagem 3</label>
+                        <input class="form-control" type="file" name="txtFoto3" id="arquivo3"  accept="image/*" />
+                         <input type="hidden" name="txtFotoVelha3"
+                               value="<%=obj.getImagem3()%>" />
+                        <td><img src="../arquivos/<%=obj.getImagem3()%>" id="img3" width="100" height="80"/></td>
+                    </div>
+
+                    
+                     
+                    
+                    
+                    <div class="form-group">
+                        <label>Autores</label>
+
+                        <%for (Autor a : autores) {
+                            //verifica se o autor está na lista de autores do livro
+                            if(obj.getAutorList().contains(a)){
+                                selecionado = "checked";
+                            }
+                            else{
+                                selecionado="";
+                            }
+                        
+                        %>
+                        <input type="checkbox" name="autoreschk" <%=selecionado%> value="<%=a.getId()%>"><%=a.getNome()%>
+
+                        <%}%>
+                    </div>
+
+                    <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
                 
-            </form>
-
-        </div>
-
+                </div>
+            </form>>
 
     </div>
 </div>
 <!-- /.row -->
-<%@include file="../rodape.jsp" %>
+    <%@include file="../rodape.jsp" %>
+    
+    <script>
+    function readURL(input,destino) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function (e) {
+                $('#'+destino).attr('src', e.target.result);
+            }
+            
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    $("#arquivo1").change(function(){
+        readURL(this,"img1");
+    });
+
+</script>

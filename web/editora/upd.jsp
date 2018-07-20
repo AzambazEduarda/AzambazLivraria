@@ -6,7 +6,7 @@
 String msg ="";
 String classe = "";
     
-    EditoraDAO dao = new EditoraDAO();
+    EditoraDAO edao = new EditoraDAO();
     Editora obj = new Editora();
     //verifica se é postm ou seja, quer alterar
     if(request.getMethod().equals("POST")){ 
@@ -18,7 +18,7 @@ String classe = "";
             obj.setLogo(request.getParameter("txtLogo"));
         }
         
-        Boolean resultado = dao.alterar(obj);
+        Boolean resultado = edao.alterar(obj);
         
         if(resultado){
             msg = "Registro alterado com sucesso";
@@ -36,8 +36,8 @@ String classe = "";
             return;
         }
         
-        dao = new EditoraDAO();
-        obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("txtCnpj")));
+        edao = new EditoraDAO();
+        obj = edao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("txtCnpj")));
         
         if(obj == null){
             response.sendRedirect("index.jsp");

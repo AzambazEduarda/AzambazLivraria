@@ -6,23 +6,23 @@
 
 <% 
     
-    EditoraDAO dao = new EditoraDAO();
-    List<Editora> lista;
+    EditoraDAO edao = new EditoraDAO();
+    List<Editora> elista;
     
     if (request.getParameter("txtFiltro") !=null) {
-        lista = dao.listar(request.getParameter("txtFiltro"));
+        elista = edao.listar(request.getParameter("txtFiltro"));
         
     } else{ 
    
     //verifico se é excluir
         if(request.getParameter("codigo") != null){
-            Editora obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+            Editora obj = edao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
             if(obj != null){
-                dao.excluir(obj);
+                edao.excluir(obj);
             }
         }
         
-        lista = dao.listar();
+        elista = edao.listar();
     }
     
     
@@ -79,19 +79,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <%for(Editora item: lista)
+                    <%for(Editora e: elista)
                     {
                     %>
                     <tr>
-                        <td><%=item.getCnpj()%></td>
-                        <td><%=item.getNome() %></td>
+                        <td><%=e.getCnpj()%></td>
+                        <td><%=e.getNome() %></td>
                         <td>
-                            <img src="../arquivos/<%=item.getLogo() %>"
+                            <img src="../arquivos/<%=e.getLogo() %>"
                                  width="40px" height="40px"/>
                         </td>
-                        <td><a href="upd.jsp?codigo=<%=item.getCnpj()%>" class="btn  btn-primary btn-sm">Alterar</a>
+                        <td><a href="upd.jsp?codigo=<%=e.getCnpj()%>" class="btn  btn-primary btn-sm">Alterar</a>
                             <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" 
-                                    onclick="codigo=<%=item.getCnpj()%>">Excluir</button>  
+                                    onclick="codigo=<%=e.getCnpj()%>">Excluir</button>  
                         </td>
                     </tr>
                     <% } %>

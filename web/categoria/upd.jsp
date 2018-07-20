@@ -6,7 +6,7 @@
 String msg ="";
 String classe = "";
     
-    CategoriaDAO dao = new CategoriaDAO();
+    CategoriaDAO cdao = new CategoriaDAO();
     Categoria obj = new Categoria();
     //verifica se é postm ou seja, quer alterar
     if(request.getMethod().equals("POST")){
@@ -14,7 +14,7 @@ String classe = "";
         //popular com oq ele digitou no form
         obj.setId(Integer.parseInt(request.getParameter("txtId")));
         obj.setNome(request.getParameter("txtNome"));
-        Boolean resultado = dao.alterar(obj);
+        Boolean resultado = cdao.alterar(obj);
         
         if(resultado){
             msg = "Registro alterado com sucesso";
@@ -32,8 +32,8 @@ String classe = "";
             return;
         }
         
-        dao = new CategoriaDAO();
-        obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+        cdao = new CategoriaDAO();
+        obj = cdao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
         
         if(obj == null){
             response.sendRedirect("index.jsp");
