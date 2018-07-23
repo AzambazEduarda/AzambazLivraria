@@ -50,32 +50,32 @@
             e.setCnpj(request.getParameter("txtEditora"));
             obj.setCategoria(c);
             obj.setEditora(e);
-            obj.setImagem1(request.getParameter("txtFoto"));
-            obj.setImagem2(request.getParameter("txtFoto2"));
-            obj.setImagem3(request.getParameter("txtFoto3"));
+            obj.setImagem1(request.getParameter("txtImagem"));
+            obj.setImagem2(request.getParameter("txtImagem2"));
+            obj.setImagem3(request.getParameter("txtImagem3"));
             
-                    if(request.getParameter("txtFoto")!=null){
+                    if(request.getParameter("txtImagem")!=null){
 
-                obj.setImagem1(request.getParameter("txtFoto"));
+                obj.setImagem1(request.getParameter("txtImagem"));
                      }
                 else{
-                 obj.setImagem1(request.getParameter("txtFotoVelha"));
+                 obj.setImagem1(request.getParameter("txtImagemVelha"));
             }
 
-                        if(request.getParameter("txtFoto2")!=null){
+                        if(request.getParameter("txtImagem2")!=null){
 
-                obj.setImagem2(request.getParameter("txtFoto2"));
-            }
-            else{
-                 obj.setImagem2(request.getParameter("txtFotoVelha2"));
-            }
-
-                            if(request.getParameter("txtFoto3")!=null){
-
-                obj.setImagem3(request.getParameter("txtFoto3"));
+                obj.setImagem2(request.getParameter("txtImagem2"));
             }
             else{
-                 obj.setImagem3(request.getParameter("txtFotoVelha3"));
+                 obj.setImagem2(request.getParameter("txtImagemVelha2"));
+            }
+
+                            if(request.getParameter("txtImagem3")!=null){
+
+                obj.setImagem3(request.getParameter("txtImagem3"));
+            }
+            else{
+                 obj.setImagem3(request.getParameter("txtImagemVelha3"));
             }
             
             List<Autor> listaautores = new ArrayList<>();
@@ -221,8 +221,8 @@
 
                    <div class="form-group">
                         <label>Image1</label>
-                        <input class="form-control" type="file" name="txtFoto" id="arquivo1"  accept="image/*" />
-                         <input type="hidden" name="txtFotoVelha"
+                        <input class="form-control" type="file" name="txtImagem" id="arquivo1"  accept="image/*" />
+                         <input type="hidden" name="txtImagemVelha"
                                value="<%=obj.getImagem1()%>" />
                         <td><img src="../arquivos/<%=obj.getImagem1()%>" id="img1" width="100" height="80"/></td>
                         
@@ -230,16 +230,16 @@
 
                     <div class="form-group">
                         <label>Imagem 2</label>
-                        <input class="form-control" type="file" name="txtFoto2" id="arquivo2"  accept="image/*" />
-                         <input type="hidden" name="txtFotoVelha2"
+                        <input class="form-control" type="file" name="txtImagem2" id="arquivo2"  accept="image/*" />
+                         <input type="hidden" name="txtImagemVelha2"
                                value="<%=obj.getImagem2()%>" />
                         <td><img src="../arquivos/<%=obj.getImagem2()%>" id="img2" width="100" height="80"/></td>
                     </div>
 
                     <div class="form-group">
                         <label>Imagem 3</label>
-                        <input class="form-control" type="file" name="txtFoto3" id="arquivo3"  accept="image/*" />
-                         <input type="hidden" name="txtFotoVelha3"
+                        <input class="form-control" type="file" name="txtImagem3" id="arquivo3"  accept="image/*" />
+                         <input type="hidden" name="txtImagemVelha3"
                                value="<%=obj.getImagem3()%>" />
                         <td><img src="../arquivos/<%=obj.getImagem3()%>" id="img3" width="100" height="80"/></td>
                     </div>

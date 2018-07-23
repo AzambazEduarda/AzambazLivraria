@@ -1,4 +1,3 @@
-
 <%@page import="java.util.List"%>
 <%@page import="modelo.Editora"%>
 <%@page import="dao.EditoraDAO"%>
@@ -6,23 +5,23 @@
 
 <% 
     
-    EditoraDAO edao = new EditoraDAO();
-    List<Editora> elista;
+    EditoraDAO dao = new EditoraDAO();
+    List<Editora> lista;
     
-    if (request.getParameter("txtFiltro") !=null) {
-        elista = edao.listar(request.getParameter("txtFiltro"));
+    if (request.getParameter("txtFiltro") != null) {
+        lista = dao.listar(request.getParameter("txtFiltro"));
         
     } else{ 
    
     //verifico se é excluir
         if(request.getParameter("codigo") != null){
-            Editora obj = edao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+            Editora obj = dao.buscarPorChavePrimaria(request.getParameter("codigo"));
             if(obj != null){
-                edao.excluir(obj);
+                dao.excluir(obj);
             }
         }
         
-        elista = edao.listar();
+        lista = dao.listar();
     }
     
     
@@ -61,7 +60,7 @@
     <div class="panel panel-default">
         <form action="#" method="post">
             <div class="form-group input-group">
-                <input type="text" class="form-control" name="txtFiltro" placeholder="digita aqui oh abestado...">
+                <input type="text" class="form-control" name="txtFiltro" placeholder="digite...">
                                 <span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button></span>
                             </div>
         </form>
@@ -72,26 +71,23 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>CNPJ</th>
+                        <th>Cnpj</th>
                         <th>Nome</th>
                         <th>Logo</th>
-                        <th>Ações</th>
+                        <th >Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <%for(Editora e: elista)
+                    <%for(Editora item: lista)
                     {
                     %>
                     <tr>
-                        <td><%=e.getCnpj()%></td>
-                        <td><%=e.getNome() %></td>
-                        <td>
-                            <img src="../arquivos/<%=e.getLogo() %>"
-                                 width="40px" height="40px"/>
-                        </td>
-                        <td><a href="upd.jsp?codigo=<%=e.getCnpj()%>" class="btn  btn-primary btn-sm">Alterar</a>
+                        <td><%=item.getCnpj()%></td>
+                        <td><%=item.getNome() %></td>
+                        <td><img src=" ../arquivos/<%=item.getLogo() %>" height="50px" width="70px"/> </td>
+                        <td><a href="upd.jsp?codigo=<%=item.getCnpj()%>" class="btn  btn-primary btn-sm">Alterar</a>
                             <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" 
-                                    onclick="codigo=<%=e.getCnpj()%>">Excluir</button>  
+                                    onclick="codigo=<%=item.getCnpj()%>">Excluir</button>  
                         </td>
                     </tr>
                     <% } %>

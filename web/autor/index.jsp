@@ -1,30 +1,29 @@
-
 <%@page import="java.util.List"%>
 <%@page import="modelo.Autor"%>
 <%@page import="dao.AutorDAO"%>
 <%@include file="../cabecalho.jsp" %>
 
-<%
-
-    AutorDAO ldao = new AutorDAO();
+<% 
+    
+    AutorDAO dao = new AutorDAO();
     List<Autor> lista;
-
+    
     if (request.getParameter("txtFiltro") != null) {
-        lista = ldao.listar(request.getParameter("txtFiltro"));
-
-    } else {
-
-        //verifico se é excluir
-        if (request.getParameter("codigo") != null) {
-            Autor obj = ldao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
-            if (obj != null) {
-                ldao.excluir(obj);
+        lista = dao.listar(request.getParameter("txtFiltro"));
+        
+    } else{ 
+   
+    //verifico se é excluir
+        if(request.getParameter("codigo") != null){
+            Autor obj = dao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+            if(obj != null){
+                dao.excluir(obj);
             }
         }
-
-        lista = ldao.listar();
+        
+        lista = dao.listar();
     }
-
+    
     
 
 %>
@@ -52,7 +51,7 @@
         <div class="panel-body">
 
             <a  href="add.jsp" class="btn  btn-primary btn-sm fa fa-plus-square-o" >Novo</a>
-
+            
         </div>
     </div>
 </div>
@@ -61,42 +60,46 @@
     <div class="panel panel-default">
         <form action="#" method="post">
             <div class="form-group input-group">
-                <input type="text" class="form-control" name="txtFiltro" placeholder="digita aqui oh abestado...">
-                <span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button></span>
-            </div>
+                <input type="text" class="form-control" name="txtFiltro" placeholder="digite...">
+                                <span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button></span>
+                            </div>
         </form>
         <div class="panel-body">
-
-
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Nome</th>
-                            <th>Nacionalidade</th>
-                            <th>Sexo</th>
-                            <th>foto</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <%for (Autor item : lista) {
-                        %>
-                        <tr>
-                            <td><%=item.getId()%></td>
-                            <td><%=item.getNome()%></td>
-                            <td><%=item.getNacionalidade()%></td>
-                            <td><%=item.getSexo()%></td>
-                            <td><img src="../arquivos/<%=item.getFoto()%>" width="70px" height="60px"/></td>
-                            <td><a href="upd.jsp?codigo=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
-                                <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="codigo =<%=item.getId()%>">Excluir</button>  
-                            </td>
-                        </tr>
-                        <% }%>
-                    </tbody>
-                </table>
-
+           
+        
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>Nacionalidade</th>
+                        <th>Sexo</th>
+                        <th>Foto</th>
+                        <th >Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <%for(Autor item: lista)
+                    {
+                    %>
+                    <tr>
+                        <td><%=item.getId()%></td>
+                        <td><%=item.getNome() %></td>
+                        <td><%=item.getNacionalidade() %></td>
+                        <td><%=item.getSexo()%></td>
+                        <td><img src="../arquivos/<%=item.getFoto() %>" height="50px"  width="70px" /></td>
+                        
+                        
+                        <td><a href="upd.jsp?codigo=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
+                            <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" 
+                                    onclick="codigo=<%=item.getId()%>">Excluir</button>  
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+           
                 <!-- /.table-responsive -->
             </div>
 
@@ -104,8 +107,8 @@
         <!-- /.panel-body -->
     </div>
     <!-- /.panel -->
-</div>
-
-
-<%@include file="../modalExcluir.jsp" %>
-<%@include file="../rodape.jsp" %>
+        </div>
+                
+                
+    <%@include file="../modalExcluir.jsp" %>
+    <%@include file="../rodape.jsp" %>

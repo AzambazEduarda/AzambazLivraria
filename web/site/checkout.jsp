@@ -1,8 +1,16 @@
+<%@page import="modelo.Cliente"%>
 <%
     if (session.getAttribute("cliente") == null) {
         response.sendRedirect("login.jsp");
         return;
     }
+    if (session.getAttribute("carrinho") == null) {
+        response.sendRedirect("index.jsp");
+        return;
+    }
+
+    Cliente cliente = (Cliente) session.getAttribute("cliente");
+
 %>
 <%@include file="cabecalho.jsp" %>
 
@@ -15,12 +23,12 @@
 
                 <div class="form-group">
                     <div class="col-md-6">
-                        <label for=fname>Nome</label>
-                        XXXXXX
+                        <label for=fname>Nome do comprador:</label>
+                        <%=cliente.getNome()%>
                     </div>
                     <div class="col-md-6">
-                        <label for=lname>Endereço de entrega</label>
-                        XXXXXX
+                        <label for=lname>Endereço de entrega:</label>
+                        <%=cliente.getEndereco()%>
                     </div>
                 </div>
             </div>
@@ -49,37 +57,13 @@
             <li><span>Order Total</span> <span>$180.00</span></li>
         </ul>
     </div>
-    <div class="cart-detail">
-        <h2>Payment Method</h2>
-        <div class="form-group">
-            <div class="col-md-12">
-                <div class="radio">
-                    <label><input type="radio" name="optradio">Direct Bank Tranfer</label>
-                </div>
+    <form action="checkout.jsp">
+        <div class="row form-group">                                  
+            <div class="col-md-3">
+                <input type="submit" value="Concluir Compra" class="btn btn-primary">
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-12">
-                <div class="radio">
-                    <label><input type="radio" name="optradio">Check Payment</label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-12">
-                <div class="radio">
-                    <label><input type="radio" name="optradio">Paypal</label>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-12">
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">I have read and accept the terms and conditions</label>
-                </div>
-            </div>
-        </div>
-    </div>
+    </form>
     <div class="row">
         <div class="col-md-12">
             <p><a href="#" class="btn btn-primary">Place an order</a></p>

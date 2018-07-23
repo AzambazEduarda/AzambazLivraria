@@ -51,7 +51,7 @@ if(session.getAttribute("administrador")==null){
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="../home">
-                   Área Administrativa
+                   Melhor Area
                 </a>
             </div>
             <!-- Top Menu Items -->

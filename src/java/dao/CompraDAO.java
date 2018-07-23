@@ -5,7 +5,7 @@
  */
 package dao;
 
-import modelo.Compralivro;
+import modelo.Compra;
 
 
 
@@ -14,9 +14,9 @@ import modelo.Compralivro;
  *
  * @author aluno
  */
-public class CompralivroDAO extends GenericDAO<Compralivro, Integer>{
-    public CompralivroDAO(){
-        super(Compralivro.class);
+public class CompraDAO extends GenericDAO<Compra, Integer>{
+    public CompraDAO(){
+        super(Compra.class);
     }
     
     

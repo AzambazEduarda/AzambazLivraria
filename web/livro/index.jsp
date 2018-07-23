@@ -1,4 +1,3 @@
-
 <%@page import="util.StormData"%>
 <%@page import="java.util.List"%>
 <%@page import="modelo.Livro"%>
@@ -6,10 +5,11 @@
 <%@include file="../cabecalho.jsp" %>
 
 <% 
+    
     LivroDAO dao = new LivroDAO();
     List<Livro> lista;
     
-    if (request.getParameter("txtFiltro") !=null) {
+    if (request.getParameter("txtFiltro") != null) {
         lista = dao.listar(request.getParameter("txtFiltro"));
         
     } else{ 
@@ -20,9 +20,13 @@
             if(obj != null){
                 dao.excluir(obj);
             }
-        }   
+        }
+        
         lista = dao.listar();
     }
+    
+    
+
 %>
 
 <div class="row">
@@ -57,7 +61,7 @@
     <div class="panel panel-default">
         <form action="#" method="post">
             <div class="form-group input-group">
-                <input type="text" class="form-control" name="txtFiltro" placeholder="digita aqui oh abestado...">
+                <input type="text" class="form-control" name="txtFiltro" placeholder="digite...">
                                 <span class="input-group-btn"><button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button></span>
                             </div>
         </form>
@@ -68,17 +72,16 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>Código</th>
                         <th>Nome</th>
-                        <th>Preco</th>
-                        <th>Datapublicacao</th>
-                        <th>Autor</th>
+                        <th>Preço</th>
+                        <th>Sinopse</th>
+                        <th>Data Publicação</th>
                         <th>Editora</th>
                         <th>Categoria</th>
-                        <th>Imagem1</th>
-                        <th>Imagem2</th>
-                        <th>Imagem3</th>
-                        <th>Sinopse</th>
+                        <th>Imagem 1</th>
+                        <th>Imagem 2</th>
+                        <th>Imagem 3</th>
                         <th >Ações</th>
                     </tr>
                 </thead>
@@ -87,19 +90,22 @@
                     {
                     %>
                     <tr>
-                        <td><%=item.getId() %></td>
+                        <td><%=item.getId()%></td>
                         <td><%=item.getNome() %></td>
-                        <td><%=item.getPreco()%></td>
-                        <td><%=item.getAutorList()%></td>
-                        <td><%=StormData.formata(item.getDatapublicacao())%></td>
-                        <td><%=item.getCategoria()%></td>
-                        <td><%=item.getEditora()%></td>
-                        <td><img src="../arquivos/<%=item.getImagem1() %>" width="40px" height="40px"/></td>
-                        <td><img src="../arquivos/<%=item.getImagem2() %>" width="40px" height="40px"/></td>
-                        <td><img src="../arquivos/<%=item.getImagem3() %>" width="40px" height="40px"/></td>
+                        <td><%=item.getPreco() %></td>
                         <td><%=item.getSinopse() %></td>
+                        <td><%=StormData.formata(item.getDatapublicacao()) %></td>
+                        <td><%=item.getEditora() %></td>
+                        <td><%=item.getCategoria() %></td>
+                        <td><img src="../arquivos/<%=item.getImagem1() %>" height="50px"  width="70px" /></td>
+                        <td><img src="../arquivos/<%=item.getImagem2() %>" height="50px"  width="70px" /></td>
+                        <td><img src="../arquivos/<%=item.getImagem3() %>" height="50px"  width="70px" /></td>
+                       
+                        
+                        
                         <td><a href="upd.jsp?codigo=<%=item.getId()%>" class="btn  btn-primary btn-sm">Alterar</a>
-                            <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" onclick="codigo=<%=item.getId()%>">Excluir</button>  
+                            <button class="btn  btn-danger btn-sm" data-toggle="modal" data-target="#myModal" 
+                                    onclick="codigo=<%=item.getId()%>">Excluir</button>  
                         </td>
                     </tr>
                     <% } %>

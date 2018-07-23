@@ -5,19 +5,24 @@
     ///se os dois campos forem informados, é login
     if (request.getParameter("txtEmail") != null
             && request.getParameter("txtSenha") != null) {
+        
         ClienteDAO dao = new ClienteDAO();
         Cliente c = dao.logar(request.getParameter("txtEmail"),
                 request.getParameter("txtSenha"));
+        
         if (c != null) {
             session.setAttribute("cliente", c);
             response.sendRedirect("checkout.jsp");
             return;
-        } else {
-%>
-<script> alert('login e/ou senha inválidos');
-</script>
-<%}
+        } 
+        else {
+        %>
+        <script> alert('login e/ou senha inválidos');
+        </script>
+        <% }
     }
+
+
     /// Se preencheu o cadastro
     if (request.getParameter("txtNEmail") != null
             && request.getParameter("txtNEnd") != null
@@ -35,7 +40,7 @@
         session.setAttribute("cliente", c);
         response.sendRedirect("checkout.jsp");
         return;
-}
+    }
 %>
 <%@include file="cabecalho.jsp" %>
 

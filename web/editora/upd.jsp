@@ -1,4 +1,3 @@
-
 <%@page import="modelo.Editora"%>
 <%@page import="dao.EditoraDAO"%>
 <%@include file="../cabecalho.jsp" %>
@@ -6,19 +5,17 @@
 String msg ="";
 String classe = "";
     
-    EditoraDAO edao = new EditoraDAO();
+    EditoraDAO dao = new EditoraDAO();
     Editora obj = new Editora();
     //verifica se é postm ou seja, quer alterar
-    if(request.getMethod().equals("POST")){ 
-        //popular com oq ele digitou no form    
-        obj.setNome(request.getParameter("txtNome"));
+    if(request.getMethod().equals("POST")){
+        
+        //popular com oq ele digitou no form
         obj.setCnpj(request.getParameter("txtCnpj"));
+        obj.setNome(request.getParameter("txtNome"));
+        obj.setLogo(request.getParameter("txtLogo"));
         
-        if(request.getParameter("txtLogo") != null){
-            obj.setLogo(request.getParameter("txtLogo"));
-        }
-        
-        Boolean resultado = edao.alterar(obj);
+        Boolean resultado = dao.alterar(obj);
         
         if(resultado){
             msg = "Registro alterado com sucesso";
@@ -36,8 +33,8 @@ String classe = "";
             return;
         }
         
-        edao = new EditoraDAO();
-        obj = edao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("txtCnpj")));
+        dao = new EditoraDAO();
+        obj = dao.buscarPorChavePrimaria(request.getParameter("codigo"));
         
         if(obj == null){
             response.sendRedirect("index.jsp");
@@ -77,26 +74,25 @@ String classe = "";
                 <div class="col-lg-6">
 
                     <div class="form-group">
-                        <label>CNPJ</label>
+                        <label>Cnpj:</label>
                         <input class="form-control" type="text" name="txtCnpj" readonly value="<%=obj.getCnpj()%>"/>
                     </div>
                     
                     <div class="form-group">
-                        <label>Nome</label>
+                        <label>Nome:</label>
                         <input class="form-control" type="text" name="txtNome" required value="<%=obj.getNome() %>" />
                     </div>
                     
+                    
                     <div class="form-group">
-                        <label>Logo</label>
-                        <input class="form-control" type="foto" name="txtFoto" required value="<%=obj.getLogo() %>" />
+                        <label>Logo:</label>
+                        <input type="file" name="txtLogo" required value="<%=obj.getLogo() %>" />
                     </div>
-             
 
-
-                <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
+                <button class="btn btn-info btn-sm" type="submit">Salvar</button>
                 
             </form>
-
+s
         </div>
 
 
