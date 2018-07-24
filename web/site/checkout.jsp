@@ -40,13 +40,11 @@
         <h2>Carrinho</h2>
         <ul>
             <li>
-                <span>Subtotal</span> <span>$100.00</span>
                 <ul>
-                    <li><span>1 x Product Name</span> <span>$99.00</span></li>
                     <li><span>1 x Product Name</span> <span>$78.00</span></li>
                 </ul>
             </li>
-            <li><span>Order Total</span> <span>$180.00</span></li>
+            <li><span>Total</span> <span>$180.00</span></li>
         </ul>
     </div>
     <form action="final.jsp">

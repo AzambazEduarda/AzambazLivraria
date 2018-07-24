@@ -32,7 +32,7 @@
         c.setEmail(request.getParameter("txtNEmail"));
         c.setEndereco(request.getParameter("txtNEnd"));
         c.setSenha(request.getParameter("txtNSenha"));
-        c.setNome(request.getParameter("txtNNOme"));
+        c.setNome(request.getParameter("txtNNome"));
         dao.incluir(c);
         session.setAttribute("cliente", c);
         response.sendRedirect("checkout.jsp");

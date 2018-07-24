@@ -33,25 +33,27 @@
                                 <h3><%=obj.getNome()%></h3>
                                 <p class="price">
                                     <span>R$ <%=obj.getPreco()%></span> 
-
                                 </p>
+                                <span><%=obj.getSinopse()%></span> 
+                                
                                 <!-- FAZER O DETALHE DO LIVRO -->
+                                
                                 <div class="size-wrap">
                                     <p class="size-desc">
-                                        Editora:
+                                        Editora :
                                         <span><%=obj.getEditora()%></span>
 
                                     </p>
                                 </div>
                                 <div class="size-wrap">
                                     <p class="size-desc">
-                                        Categoria:
+                                        Categoria :
                                         <span><%=obj.getCategoria()%></span>
                                     </p>
                                 </div>
                                 <div class="size-wrap">
                                     <p class="size-desc">
-                                        Autores: 
+                                        Autores : 
                                         <span>
                                             <%for (Autor a : obj.getAutorList()) {
 
