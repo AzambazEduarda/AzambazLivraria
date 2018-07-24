@@ -221,7 +221,7 @@
 
                    <div class="form-group">
                         <label>Image1</label>
-                        <input class="form-control" type="file" name="txtImagem" id="arquivo1"  accept="image/*" />
+                        <input type="file" name="txtImagem" id="arquivo1"  accept="image/*" />
                          <input type="hidden" name="txtImagemVelha"
                                value="<%=obj.getImagem1()%>" />
                         <td><img src="../arquivos/<%=obj.getImagem1()%>" id="img1" width="100" height="80"/></td>
@@ -230,7 +230,7 @@
 
                     <div class="form-group">
                         <label>Imagem 2</label>
-                        <input class="form-control" type="file" name="txtImagem2" id="arquivo2"  accept="image/*" />
+                        <input type="file" name="txtImagem2" id="arquivo2"  accept="image/*" />
                          <input type="hidden" name="txtImagemVelha2"
                                value="<%=obj.getImagem2()%>" />
                         <td><img src="../arquivos/<%=obj.getImagem2()%>" id="img2" width="100" height="80"/></td>
@@ -238,7 +238,7 @@
 
                     <div class="form-group">
                         <label>Imagem 3</label>
-                        <input class="form-control" type="file" name="txtImagem3" id="arquivo3"  accept="image/*" />
+                        <input type="file" name="txtImagem3" id="arquivo3"  accept="image/*" />
                          <input type="hidden" name="txtImagemVelha3"
                                value="<%=obj.getImagem3()%>" />
                         <td><img src="../arquivos/<%=obj.getImagem3()%>" id="img3" width="100" height="80"/></td>

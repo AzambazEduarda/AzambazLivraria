@@ -21,13 +21,11 @@
         </script>
         <% }
     }
-
-
     /// Se preencheu o cadastro
     if (request.getParameter("txtNEmail") != null
             && request.getParameter("txtNEnd") != null
             && request.getParameter("txtNSenha") != null
-            && request.getParameter("txtNNome") != null);
+            && request.getParameter("txtNNome") != null)
     {
         ClienteDAO dao = new ClienteDAO();
         Cliente c = new Cliente();
@@ -36,12 +34,12 @@
         c.setSenha(request.getParameter("txtNSenha"));
         c.setNome(request.getParameter("txtNNOme"));
         dao.incluir(c);
-
         session.setAttribute("cliente", c);
         response.sendRedirect("checkout.jsp");
         return;
     }
 %>
+
 <%@include file="cabecalho.jsp" %>
 
 <div class="colorlib-shop">
@@ -90,7 +88,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="lnme">Nome</label>
-                                    <input type="password" id="lname" name="txtNNome" class="form-control" placeholder="Digite sua senha">
+                                    <input type="text" id="lname" name="txtNNome" class="form-control" placeholder="Digite sua senha">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="fend">Endereço</label>

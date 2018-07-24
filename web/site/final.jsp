@@ -46,5 +46,20 @@
     }
     
 %>
+
 <%@include file="cabecalho.jsp" %>
 
+   <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center colorlib-heading">
+                <h2><span>Obrigada por comprar conosco</span></h2>
+            </div>
+        </div>
+  <form action="index.jsp">
+        <div  class="col-md-6 col-md-offset-3 text-center colorlib-heading">                                  
+            <div class="col-md-3">
+                <input type="submit" value="Voltar a página inicial" class="btn btn-primary">
+            </div>
+        </div>
+    </form>
+
+<%@include file="rodape.jsp" %>

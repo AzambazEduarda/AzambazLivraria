@@ -33,8 +33,8 @@ String classe = "";
             return;
         }
         
-        dao = new EditoraDAO();
-        obj = dao.buscarPorChavePrimaria(request.getParameter("codigo"));
+        EditoraDAO edao = new EditoraDAO();
+        obj = edao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
         
         if(obj == null){
             response.sendRedirect("index.jsp");

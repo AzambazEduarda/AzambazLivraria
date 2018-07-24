@@ -94,7 +94,7 @@
                         <td><%=item.getNome() %></td>
                         <td><%=item.getPreco() %></td>
                         <td><%=item.getSinopse() %></td>
-                        <td><%=StormData.formata(item.getDatapublicacao()) %></td>
+                        <td><%=StormData.formata(item.getDatapublicacao())%></td>
                         <td><%=item.getEditora() %></td>
                         <td><%=item.getCategoria() %></td>
                         <td><img src="../arquivos/<%=item.getImagem1() %>" height="50px"  width="70px" /></td>

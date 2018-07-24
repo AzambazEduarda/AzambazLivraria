@@ -67,9 +67,6 @@
             }
         }
     }
-     
-     
-     
     dao.fecharConexao();
 %>
 <div class="row">
@@ -109,11 +106,15 @@
                     </div>
                     <div class="form-group">
                         <label>Preco: </label>
-                        <input class="form-control" type="number"  name="txtPreco"  required />
+                        <input class="form-control" type="text"  name="txtPreco"  required />
                     </div>
                     <div class="form-group">
                         <label>Data de Publicação: </label>
-                        <input class="form-control" type="date"  name="txtDataPublicacao"  required />
+                        <input class="form-control" type="text"  name="txtData"  required />
+                    </div>
+                    <div class="form-group">
+                        <label>Sinopse: </label>
+                        <input class="form-control" type="text"  name="txtSinopse"  required />
                     </div>
                     <div class="form-group">
                         <label> Categoria: </label>
@@ -156,19 +157,15 @@
                      </div>
                     <div class="form-group">
                         <label>Imagem: </label>
-                        <input type="file"  name="txtImagem1"/>
+                        <input type="file"  name="txtImagem"  required />
                     </div>
                     <div class="form-group">
                         <label>Imagem 2: </label>
-                        <input type="file"  name="txtImagem2"/>
+                        <input type="file"  name="txtImagem2"  required />
                     </div>
                     <div class="form-group">
                         <label>Imagem 3: </label>
-                        <input type="file"  name="txtImagem3"/>
-                    </div>
-                           <div class="form-group">
-                        <label>Sinopse: </label>
-                        <input class="form-control" type="text"  name="txtSinopse"  required />
+                        <input type="file"  name="txtImagem3"  required />
                     </div>
                     <button class="btn btn-primary btn-sm" type="submit">Salvar</button>
 

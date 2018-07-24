@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="col-md-6 text-center">
-                    <h2><i class="icon-paperplane"></i>Inscreva-se para receber informações </h2>
+                    <h2><i class="icon-paperplane"></i>Inscreva-se</h2>
                 </div>
                 <div class="col-md-6">
                     <form class="form-inline qbstp-header-subscribe">
@@ -29,7 +29,7 @@
         <div class="row row-pb-md">
             <div class="col-md-3 colorlib-widget">
                 <h4>Sobre Loja</h4>
-                <p>É fácil de encontrar falhas com ele, sem problemas um. Ou com ternura mais reprovam você. Quando chamado para obter culpa extremamente importante.</p>
+                <p>É fácil nos encontrar.</p>
                 <p>
                 <ul class="colorlib-social-icons">
                     <li><a href="#"><i class="icon-twitter"></i></a></li>

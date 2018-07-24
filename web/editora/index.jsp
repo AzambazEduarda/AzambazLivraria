@@ -5,23 +5,23 @@
 
 <% 
     
-    EditoraDAO dao = new EditoraDAO();
+    EditoraDAO edao = new EditoraDAO();
     List<Editora> lista;
     
     if (request.getParameter("txtFiltro") != null) {
-        lista = dao.listar(request.getParameter("txtFiltro"));
+        lista = edao.listar(request.getParameter("txtFiltro"));
         
     } else{ 
    
     //verifico se é excluir
         if(request.getParameter("codigo") != null){
-            Editora obj = dao.buscarPorChavePrimaria(request.getParameter("codigo"));
-            if(obj != null){
-                dao.excluir(obj);
+            Editora editora = edao.buscarPorChavePrimaria(Integer.parseInt(request.getParameter("codigo")));
+            if(editora != null){
+                edao.excluir(editora);
             }
         }
         
-        lista = dao.listar();
+        lista = edao.listar();
     }
     
     
