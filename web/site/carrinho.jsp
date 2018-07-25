@@ -1,3 +1,4 @@
+<%@page import="modelo.Compra"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="modelo.Compralivro"%>
 <%@page import="modelo.Livro"%>
@@ -28,6 +29,15 @@ else
     carrinho.add(cl);
 }
 session.setAttribute("carrinho", carrinho);
+
+///TOtal
+Compra compra = new Compra();
+Float valor = 0.0f;
+for(Compralivro car : carrinho)
+{
+    valor = valor + car.getValorunitario()*car.getQtdade();
+}
+compra.setValor(valor);
 %>
 
 <!-- util : ; { ""-->
@@ -123,7 +133,7 @@ session.setAttribute("carrinho", carrinho);
                             <div class="total">
                                 
                                 <div class="grand-total">
-                                    <p><span><strong>Total:</strong></span> <span>$450.00</span></p>
+                                    <p><span><strong>Total:</strong></span> <span>R$<%=compra.getValor()%></span></p>
                                 </div>
                             </div>
                         </div>

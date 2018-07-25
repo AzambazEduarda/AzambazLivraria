@@ -1,5 +1,10 @@
+
+<%@page import="modelo.Livro"%>
+<%@page import="modelo.Compralivro"%>
+<%@page import="modelo.Compra"%>
 <%@page import="modelo.Cliente"%>
 <%
+    
     if (session.getAttribute("cliente") == null) {
         response.sendRedirect("login.jsp");
         return;
@@ -10,7 +15,8 @@
     }
 
     Cliente cliente = (Cliente) session.getAttribute("cliente");
-
+    
+    ///TOtal
 %>
 <%@include file="cabecalho.jsp" %>
 
@@ -36,17 +42,6 @@
 </form>
 </div>
 <div class="col-md-5">
-    <div class="cart-detail">
-        <h2>Carrinho</h2>
-        <ul>
-            <li>
-                <ul>
-                    <li><span>1 x Product Name</span> <span>$78.00</span></li>
-                </ul>
-            </li>
-            <li><span>Total</span> <span>$180.00</span></li>
-        </ul>
-    </div>
     <form action="final.jsp">
         <div class="row form-group">                                  
             <div class="col-md-3">

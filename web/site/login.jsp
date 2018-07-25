@@ -88,11 +88,11 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label for="lnme">Nome</label>
-                                    <input type="text" id="lname" name="txtNNome" class="form-control" placeholder="Digite sua senha">
+                                    <input type="text" id="lname" name="txtNNome" class="form-control" placeholder="Digite seu nome">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="fend">Endereço</label>
-                                    <input type="text" id="fname" name="txtNEnd" class="form-control" placeholder="Digite seu email">
+                                    <input type="text" id="fname" name="txtNEnd" class="form-control" placeholder="Digite seu endereco">
                                 </div>
                             </div>
                             <form action="checkout.jsp">
